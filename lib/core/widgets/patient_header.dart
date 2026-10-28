@@ -36,7 +36,7 @@ class _PatientHeaderState extends State<PatientHeader> {
     ];
 
     return Container(
-      color: AppColors.surfaceRaised,
+      color: context.warna.surfaceRaised,
       padding: const EdgeInsets.fromLTRB(AppSpacing.s4, 0, AppSpacing.s4, AppSpacing.s3),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -52,10 +52,7 @@ class _PatientHeaderState extends State<PatientHeader> {
           ),
           const SizedBox(height: AppSpacing.s3),
           Container(
-            decoration: const BoxDecoration(
-              color: AppColors.surfaceSunken,
-              borderRadius: BorderRadius.all(AppRadius.md),
-            ),
+            decoration: BoxDecoration(color: context.warna.surfaceSunken, borderRadius: BorderRadius.all(AppRadius.md)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -82,16 +79,16 @@ class _PatientHeaderState extends State<PatientHeader> {
       padding: const EdgeInsets.only(left: AppSpacing.s3),
       child: Row(
         children: [
-          Text('Vital $jam', style: AppText.caption),
+          Text('Vital $jam', style: context.teks.caption),
           const SizedBox(width: AppSpacing.s2),
           Expanded(
             child: abnormal.isEmpty
-                ? Text('Dalam batas normal', style: AppText.caption.copyWith(color: AppColors.ink))
+                ? Text('Dalam batas normal', style: context.teks.caption.copyWith(color: context.warna.ink))
                 : Text.rich(
                     TextSpan(
                       children: [
                         for (var i = 0; i < abnormal.length; i++) ...[
-                          if (i > 0) TextSpan(text: ' · ', style: AppText.caption),
+                          if (i > 0) TextSpan(text: ' · ', style: context.teks.caption),
                           _spanAbnormal(abnormal[i].$1, abnormal[i].$2),
                         ],
                       ],
@@ -117,7 +114,7 @@ class _PatientHeaderState extends State<PatientHeader> {
 
   TextSpan _spanAbnormal(String label, String nilai) {
     final status = statusVital(label, nilai, abnormal: true);
-    final style = AppText.caption.copyWith(color: status.color, fontWeight: FontWeight.w700);
+    final style = context.teks.caption.copyWith(color: status.warna(context.warna), fontWeight: FontWeight.w700);
     return TextSpan(text: [labelVital(label), nilai, ?status.arrow].join(' '), style: style);
   }
 
@@ -145,7 +142,7 @@ class _PatientHeaderState extends State<PatientHeader> {
             ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: AppSpacing.s1),
-            child: Text('Datang ${h.datang} · ${h.penjamin}', style: AppText.caption),
+            child: Text('Datang ${h.datang} · ${h.penjamin}', style: context.teks.caption),
           ),
         ],
       ),
@@ -155,7 +152,7 @@ class _PatientHeaderState extends State<PatientHeader> {
   Widget _selVital(String label, String nilai, bool abnormal) {
     return Column(
       children: [
-        Text(labelVital(label), style: AppText.caption),
+        Text(labelVital(label), style: context.teks.caption),
         ValueText(nilai, status: statusVital(label, nilai, abnormal: abnormal)),
       ],
     );

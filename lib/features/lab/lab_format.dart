@@ -27,10 +27,10 @@ List<HasilLab> urutHasil(Iterable<HasilLab> hasil) {
 }
 
 /// Warna teks status order: belum selesai kuning; selesai dengan temuan merah; selesai normal hijau.
-Color warnaStatusOrder(OrderLab o) {
-  if (!o.selesai) return AppColors.amber;
+Color warnaStatusOrder(OrderLab o, AppColors c) {
+  if (!o.selesai) return c.amber;
   final s = o.status.toLowerCase();
-  return s.contains('kritis') || s.contains('luar rujukan') ? AppColors.danger : AppColors.success;
+  return s.contains('kritis') || s.contains('luar rujukan') ? c.danger : c.success;
 }
 
 /// "Dipesan 08:50 · berikutnya: sampel diambil" / "Selesai 08:31".

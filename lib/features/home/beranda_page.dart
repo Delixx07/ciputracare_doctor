@@ -25,7 +25,7 @@ class BerandaPage extends ConsumerWidget {
     final sekarang = DateTime.now();
 
     return Scaffold(
-      backgroundColor: AppColors.canvas,
+      backgroundColor: context.warna.canvas,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -119,7 +119,7 @@ class _Isi extends StatelessWidget {
         const SizedBox(height: AppSpacing.s5),
         Text(
           'Diperbarui ${formatJam(diperbarui)} · tarik ke bawah untuk memuat ulang',
-          style: AppText.small,
+          style: context.teks.small,
           textAlign: TextAlign.center,
         ),
       ],
@@ -159,10 +159,10 @@ class _KartuAngka extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: AppColors.surfaceRaised,
-      shape: const RoundedRectangleBorder(
+      color: context.warna.surfaceRaised,
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(AppRadius.lg),
-        side: BorderSide(color: AppColors.line),
+        side: BorderSide(color: context.warna.line),
       ),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
@@ -172,11 +172,11 @@ class _KartuAngka extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(label, style: AppText.caption.copyWith(color: AppColors.ink)),
+              Text(label, style: context.teks.caption.copyWith(color: context.warna.ink)),
               const SizedBox(height: AppSpacing.s1),
-              Text('$angka', style: AppText.display),
+              Text('$angka', style: context.teks.display),
               const SizedBox(height: AppSpacing.s1),
-              Text(keterangan, style: AppText.small),
+              Text(keterangan, style: context.teks.small),
             ],
           ),
         ),
@@ -194,16 +194,16 @@ class _KartuSerahTerima extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.s4),
-      decoration: const BoxDecoration(color: AppColors.goldSoft, borderRadius: BorderRadius.all(AppRadius.lg)),
+      decoration: BoxDecoration(color: context.warna.goldSoft, borderRadius: BorderRadius.all(AppRadius.lg)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             ['Serah terima', if (serahTerima.dari.isNotEmpty) serahTerima.dari].join(' · '),
-            style: AppText.caption.copyWith(color: AppColors.goldStrong, fontWeight: FontWeight.w700),
+            style: context.teks.caption.copyWith(color: context.warna.goldStrong, fontWeight: FontWeight.w700),
           ),
           const SizedBox(height: AppSpacing.s1),
-          Text(serahTerima.isi, style: AppText.body),
+          Text(serahTerima.isi, style: context.teks.body),
         ],
       ),
     );

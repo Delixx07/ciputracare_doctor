@@ -40,14 +40,14 @@ class _TrenPageState extends ConsumerState<TrenPage> {
     if (!pilihan.contains(_item)) pilihan.insert(0, _item);
 
     return Scaffold(
-      backgroundColor: AppColors.canvas,
+      backgroundColor: context.warna.canvas,
       appBar: AppBar(
         titleSpacing: context.canPop() ? 0 : AppSpacing.s4,
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Tren hasil lab', style: AppText.title),
-            if (nama != null) Text(nama, style: AppText.caption),
+            Text('Tren hasil lab', style: context.teks.title),
+            if (nama != null) Text(nama, style: context.teks.caption),
           ],
         ),
       ),
@@ -126,16 +126,18 @@ class _Isi extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Expanded(child: Text('${t.item} (${t.satuan})', style: AppText.section)),
-                  Text('Terakhir ', style: AppText.caption),
+                  Expanded(child: Text('${t.item} (${t.satuan})', style: context.teks.section)),
+                  Text('Terakhir ', style: context.teks.caption),
                   Text(
                     '${_angka(terakhir.nilai)}$arah',
-                    style: AppText.bodyStrong.copyWith(color: _luar(terakhir.nilai) ? AppColors.danger : AppColors.ink),
+                    style: context.teks.bodyStrong.copyWith(
+                      color: _luar(terakhir.nilai) ? context.warna.danger : context.warna.ink,
+                    ),
                   ),
                 ],
               ),
               if (t.rujukan.length == 2)
-                Text('Rujukan ${_angka(t.rujukan[0])}–${_angka(t.rujukan[1])}', style: AppText.small),
+                Text('Rujukan ${_angka(t.rujukan[0])}–${_angka(t.rujukan[1])}', style: context.teks.small),
               const SizedBox(height: AppSpacing.s4),
               AspectRatio(
                 aspectRatio: 1.6,
@@ -195,13 +197,13 @@ class _Grafik extends StatelessWidget {
                 HorizontalRangeAnnotation(
                   y1: t.rujukan[0].toDouble(),
                   y2: t.rujukan[1].toDouble(),
-                  color: AppColors.successSoft,
+                  color: context.warna.successSoft,
                 ),
             ],
           ),
           gridData: FlGridData(
             drawVerticalLine: false,
-            getDrawingHorizontalLine: (_) => const FlLine(color: AppColors.line, strokeWidth: AppSize.strokeThin),
+            getDrawingHorizontalLine: (_) => FlLine(color: context.warna.line, strokeWidth: AppSize.strokeThin),
           ),
           borderData: FlBorderData(show: false),
           titlesData: FlTitlesData(
@@ -215,7 +217,7 @@ class _Grafik extends StatelessWidget {
                     ? const SizedBox()
                     : SideTitleWidget(
                         meta: meta,
-                        child: Text(_angka(v), style: AppText.small),
+                        child: Text(_angka(v), style: context.teks.small),
                       ),
               ),
             ),
@@ -229,7 +231,7 @@ class _Grafik extends StatelessWidget {
                   if (v != i || i < 0 || i >= t.titik.length) return const SizedBox();
                   return SideTitleWidget(
                     meta: meta,
-                    child: Text(t.titik[i].waktu, style: AppText.small),
+                    child: Text(t.titik[i].waktu, style: context.teks.small),
                   );
                 },
               ),
@@ -237,12 +239,12 @@ class _Grafik extends StatelessWidget {
           ),
           lineTouchData: LineTouchData(
             touchTooltipData: LineTouchTooltipData(
-              getTooltipColor: (_) => AppColors.brandStrong,
+              getTooltipColor: (_) => context.warna.brandStrong,
               getTooltipItems: (spots) => [
                 for (final s in spots)
                   LineTooltipItem(
                     '${t.titik[s.x.round()].waktu}\n${_angka(s.y)} ${t.satuan}',
-                    AppText.small.copyWith(color: AppColors.onBrand, fontWeight: FontWeight.w700),
+                    context.teks.small.copyWith(color: context.warna.onBrand, fontWeight: FontWeight.w700),
                   ),
               ],
             ),
@@ -250,14 +252,14 @@ class _Grafik extends StatelessWidget {
           lineBarsData: [
             LineChartBarData(
               spots: spots,
-              color: AppColors.brand,
+              color: context.warna.brand,
               barWidth: AppSize.stroke,
               dotData: FlDotData(
                 getDotPainter: (spot, _, _, _) => FlDotCirclePainter(
                   radius: AppSize.chartDot,
-                  color: luar(spot.y) ? AppColors.danger : AppColors.brand,
+                  color: luar(spot.y) ? context.warna.danger : context.warna.brand,
                   strokeWidth: AppSize.stroke,
-                  strokeColor: AppColors.surfaceRaised,
+                  strokeColor: context.warna.surfaceRaised,
                 ),
               ),
             ),

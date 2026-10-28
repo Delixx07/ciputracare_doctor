@@ -6,16 +6,27 @@ import '../theme/app_text.dart';
 
 /// Nada warna. Merah = kritis/alergi, kuning = perlu perhatian, hijau = selesai.
 enum ChipTone {
-  danger(AppColors.danger, AppColors.dangerSoft),
-  warn(AppColors.amber, AppColors.amberSoft),
-  success(AppColors.success, AppColors.successSoft),
-  info(AppColors.brand, AppColors.brandSoft),
-  neutral(AppColors.inkMuted, AppColors.surfaceSunken);
+  danger,
+  warn,
+  success,
+  info,
+  neutral;
 
-  const ChipTone(this.foreground, this.background);
+  Color foreground(AppColors c) => switch (this) {
+    danger => c.danger,
+    warn => c.amber,
+    success => c.success,
+    info => c.brand,
+    neutral => c.inkMuted,
+  };
 
-  final Color foreground;
-  final Color background;
+  Color background(AppColors c) => switch (this) {
+    danger => c.dangerSoft,
+    warn => c.amberSoft,
+    success => c.successSoft,
+    info => c.brandSoft,
+    neutral => c.surfaceSunken,
+  };
 }
 
 /// Label status kecil, mis. "Triage 3", "Terverifikasi", "Kritis".
@@ -26,13 +37,13 @@ class StatusChip extends StatelessWidget {
   final ChipTone tone;
   final IconData? icon;
 
-  /// Latar penuh (mis. chip "Kritis"); default latar lembut.
+  /// Latar merah penuh (chip "Kritis"); default latar lembut.
   final bool filled;
 
   @override
   Widget build(BuildContext context) {
-    final fg = filled ? AppColors.onDanger : tone.foreground;
-    final bg = filled ? tone.foreground : tone.background;
+    final fg = filled ? context.warna.onDanger : tone.foreground(context.warna);
+    final bg = filled ? context.warna.dangerFill : tone.background(context.warna);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.s2, vertical: AppSpacing.s05),
       decoration: BoxDecoration(color: bg, borderRadius: const BorderRadius.all(AppRadius.sm)),
@@ -43,7 +54,7 @@ class StatusChip extends StatelessWidget {
           Flexible(
             child: Text(
               label,
-              style: AppText.small.copyWith(color: fg, fontWeight: FontWeight.w600),
+              style: context.teks.small.copyWith(color: fg, fontWeight: FontWeight.w600),
               overflow: TextOverflow.ellipsis,
             ),
           ),
@@ -64,7 +75,7 @@ class StatusDot extends StatelessWidget {
     return Container(
       width: AppSize.dot,
       height: AppSize.dot,
-      decoration: BoxDecoration(color: tone.foreground, shape: BoxShape.circle),
+      decoration: BoxDecoration(color: tone.foreground(context.warna), shape: BoxShape.circle),
     );
   }
 }

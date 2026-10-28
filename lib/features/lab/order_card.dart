@@ -18,10 +18,10 @@ class OrderCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final o = order;
     return Material(
-      color: AppColors.surfaceRaised,
-      shape: const RoundedRectangleBorder(
+      color: context.warna.surfaceRaised,
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(AppRadius.lg),
-        side: BorderSide(color: AppColors.line),
+        side: BorderSide(color: context.warna.line),
       ),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
@@ -34,18 +34,21 @@ class OrderCard extends StatelessWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(child: Text(o.judul, style: AppText.bodyStrong)),
+                  Expanded(child: Text(o.judul, style: context.teks.bodyStrong)),
                   const SizedBox(width: AppSpacing.s2),
                   Text(
                     o.status,
-                    style: AppText.caption.copyWith(color: warnaStatusOrder(o), fontWeight: FontWeight.w700),
+                    style: context.teks.caption.copyWith(
+                      color: warnaStatusOrder(o, context.warna),
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ],
               ),
               const SizedBox(height: AppSpacing.s1),
               Row(
                 children: [
-                  Text(o.noTrx, style: AppText.data.copyWith(color: AppColors.inkMuted)),
+                  Text(o.noTrx, style: context.teks.data.copyWith(color: context.warna.inkMuted)),
                   if (o.cito) ...[
                     const SizedBox(width: AppSpacing.s2),
                     const StatusChip('CITO', tone: ChipTone.danger),
@@ -55,7 +58,7 @@ class OrderCard extends StatelessWidget {
               const SizedBox(height: AppSpacing.s3),
               TahapBar(order: o),
               const SizedBox(height: AppSpacing.s2),
-              Text(keteranganTahap(o), style: AppText.small),
+              Text(keteranganTahap(o), style: context.teks.small),
             ],
           ),
         ),
@@ -72,7 +75,7 @@ class TahapBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final warna = order.selesai ? AppColors.success : AppColors.brand;
+    final warna = order.selesai ? context.warna.success : context.warna.brand;
     return Semantics(
       label: 'Tahap ${order.tahap} dari ${OrderLab.jumlahTahap}',
       excludeSemantics: true,
@@ -84,7 +87,7 @@ class TahapBar extends StatelessWidget {
               child: Container(
                 height: AppSpacing.s1,
                 decoration: BoxDecoration(
-                  color: i < order.tahap ? warna : AppColors.line,
+                  color: i < order.tahap ? warna : context.warna.line,
                   borderRadius: const BorderRadius.all(AppRadius.pill),
                 ),
               ),

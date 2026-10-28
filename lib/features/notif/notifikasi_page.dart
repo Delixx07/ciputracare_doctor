@@ -33,14 +33,14 @@ class _NotifikasiPageState extends ConsumerState<NotifikasiPage> {
     bool belumDibaca(Notifikasi n) => n.belumDibaca && !dibaca.contains(n.id);
 
     return Scaffold(
-      backgroundColor: AppColors.canvas,
+      backgroundColor: context.warna.canvas,
       appBar: AppBar(
         titleSpacing: context.canPop() ? 0 : AppSpacing.s4,
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Notifikasi', style: AppText.title),
-            Text(belum == 0 ? 'Semua sudah dibaca' : '$belum belum dibaca', style: AppText.caption),
+            Text('Notifikasi', style: context.teks.title),
+            Text(belum == 0 ? 'Semua sudah dibaca' : '$belum belum dibaca', style: context.teks.caption),
           ],
         ),
         actions: [
@@ -123,10 +123,10 @@ class _BarisNotif extends StatelessWidget {
     };
 
     return Material(
-      color: belumDibaca ? AppColors.brandSoft : AppColors.surfaceRaised,
+      color: belumDibaca ? context.warna.brandSoft : context.warna.surfaceRaised,
       shape: RoundedRectangleBorder(
         borderRadius: const BorderRadius.all(AppRadius.lg),
-        side: BorderSide(color: belumDibaca ? AppColors.brandPastel : AppColors.line),
+        side: BorderSide(color: belumDibaca ? context.warna.brandPastel : context.warna.line),
       ),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
@@ -140,10 +140,10 @@ class _BarisNotif extends StatelessWidget {
                 width: AppSpacing.s8 + AppSpacing.s1,
                 height: AppSpacing.s8 + AppSpacing.s1,
                 decoration: BoxDecoration(
-                  color: tone == ChipTone.info ? AppColors.surfaceRaised : tone.background,
+                  color: tone == ChipTone.info ? context.warna.surfaceRaised : tone.background(context.warna),
                   borderRadius: const BorderRadius.all(AppRadius.md),
                 ),
-                child: Icon(ikon, color: tone.foreground, size: AppSize.icon - AppSpacing.s1),
+                child: Icon(ikon, color: tone.foreground(context.warna), size: AppSize.icon - AppSpacing.s1),
               ),
               const SizedBox(width: AppSpacing.s3),
               Expanded(
@@ -153,12 +153,14 @@ class _BarisNotif extends StatelessWidget {
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(child: Text(n.judul, style: belumDibaca ? AppText.bodyStrong : AppText.body)),
+                        Expanded(
+                          child: Text(n.judul, style: belumDibaca ? context.teks.bodyStrong : context.teks.body),
+                        ),
                         const SizedBox(width: AppSpacing.s2),
-                        Text(n.jam, style: AppText.small),
+                        Text(n.jam, style: context.teks.small),
                       ],
                     ),
-                    Text(n.isi, style: AppText.caption),
+                    Text(n.isi, style: context.teks.caption),
                   ],
                 ),
               ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 import '../theme/app_text.dart';
 import 'status_chip.dart';
@@ -26,15 +27,18 @@ class TriageTile extends StatelessWidget {
       child: Container(
         width: AppSize.triageTile,
         padding: const EdgeInsets.symmetric(vertical: AppSpacing.s2),
-        decoration: BoxDecoration(color: tone.background, borderRadius: const BorderRadius.all(AppRadius.md)),
+        decoration: BoxDecoration(
+          color: tone.background(context.warna),
+          borderRadius: const BorderRadius.all(AppRadius.md),
+        ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               'Level',
-              style: AppText.small.copyWith(color: tone.foreground, fontWeight: FontWeight.w600),
+              style: context.teks.small.copyWith(color: tone.foreground(context.warna), fontWeight: FontWeight.w600),
             ),
-            Text('$level', style: AppText.display.copyWith(color: tone.foreground)),
+            Text('$level', style: context.teks.display.copyWith(color: tone.foreground(context.warna))),
           ],
         ),
       ),

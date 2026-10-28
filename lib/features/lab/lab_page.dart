@@ -34,7 +34,7 @@ class _LabPageState extends ConsumerState<LabPage> {
     });
 
     return Scaffold(
-      backgroundColor: AppColors.canvas,
+      backgroundColor: context.warna.canvas,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -111,18 +111,18 @@ class _KartuMasuk extends StatelessWidget {
     final m = masuk;
     final kritisBaru = m.status == StatusLabMasuk.kritis;
     final warnaRingkas = switch (m.status) {
-      StatusLabMasuk.kritis || StatusLabMasuk.kritisDikonfirmasi || StatusLabMasuk.abnormal => AppColors.danger,
-      StatusLabMasuk.diproses => AppColors.amber,
-      StatusLabMasuk.normal => AppColors.success,
+      StatusLabMasuk.kritis || StatusLabMasuk.kritisDikonfirmasi || StatusLabMasuk.abnormal => context.warna.danger,
+      StatusLabMasuk.diproses => context.warna.amber,
+      StatusLabMasuk.normal => context.warna.success,
     };
     final inisial = m.nama.split(' ').where((k) => k.isNotEmpty).take(2).map((k) => k[0].toUpperCase()).join();
 
     return Material(
-      color: AppColors.surfaceRaised,
+      color: context.warna.surfaceRaised,
       shape: RoundedRectangleBorder(
         borderRadius: const BorderRadius.all(AppRadius.lg),
         side: BorderSide(
-          color: kritisBaru ? AppColors.danger : AppColors.line,
+          color: kritisBaru ? context.warna.danger : context.warna.line,
           width: kritisBaru ? AppSize.strokeEmphasis : AppSize.strokeThin,
         ),
       ),
@@ -136,10 +136,10 @@ class _KartuMasuk extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: AppSpacing.s5,
-                backgroundColor: AppColors.brandSoft,
+                backgroundColor: context.warna.brandSoft,
                 child: Text(
                   inisial,
-                  style: AppText.caption.copyWith(color: AppColors.brand, fontWeight: FontWeight.w700),
+                  style: context.teks.caption.copyWith(color: context.warna.brand, fontWeight: FontWeight.w700),
                 ),
               ),
               const SizedBox(width: AppSpacing.s3),
@@ -151,15 +151,15 @@ class _KartuMasuk extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.baseline,
                       textBaseline: TextBaseline.alphabetic,
                       children: [
-                        Expanded(child: Text(m.nama, style: AppText.bodyStrong)),
-                        Text('${m.bed} · ${m.jam}', style: AppText.small),
+                        Expanded(child: Text(m.nama, style: context.teks.bodyStrong)),
+                        Text('${m.bed} · ${m.jam}', style: context.teks.small),
                       ],
                     ),
-                    Text(m.pemeriksaan, style: AppText.caption),
+                    Text(m.pemeriksaan, style: context.teks.caption),
                     const SizedBox(height: AppSpacing.s1),
                     Text(
                       m.ringkasan,
-                      style: AppText.caption.copyWith(color: warnaRingkas, fontWeight: FontWeight.w700),
+                      style: context.teks.caption.copyWith(color: warnaRingkas, fontWeight: FontWeight.w700),
                     ),
                   ],
                 ),

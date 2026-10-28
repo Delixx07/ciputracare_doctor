@@ -58,7 +58,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final auth = ref.watch(authControllerProvider);
-    final labelStyle = AppText.caption.copyWith(color: AppColors.ink, fontWeight: FontWeight.w600);
+    final labelStyle = context.teks.caption.copyWith(color: context.warna.ink, fontWeight: FontWeight.w600);
 
     return Scaffold(
       body: SafeArea(
@@ -71,21 +71,35 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Image.asset(
-                      'assets/images/logo_full.png',
-                      height: AppSize.logoLogin,
-                      semanticLabel: 'CiputraCare Doctor',
+                    // Logo navy: di mode gelap diberi alas putih agar terbaca.
+                    Center(
+                      child: Container(
+                        padding: const EdgeInsets.all(AppSpacing.s3),
+                        decoration: BoxDecoration(
+                          color: context.warna.logoBackdrop,
+                          borderRadius: const BorderRadius.all(AppRadius.lg),
+                        ),
+                        child: Image.asset(
+                          'assets/images/logo_full.png',
+                          height: AppSize.logoLogin,
+                          semanticLabel: 'CiputraCare Doctor',
+                        ),
+                      ),
                     ),
                     const SizedBox(height: AppSpacing.s3),
                     Center(
-                      child: Container(width: AppSize.accentShort, height: AppSize.accentLine, color: AppColors.gold),
+                      child: Container(
+                        width: AppSize.accentShort,
+                        height: AppSize.accentLine,
+                        color: context.warna.gold,
+                      ),
                     ),
                     const SizedBox(height: AppSpacing.s5),
-                    Text('Selamat datang', style: AppText.titleLg, textAlign: TextAlign.center),
+                    Text('Selamat datang', style: context.teks.titleLg, textAlign: TextAlign.center),
                     const SizedBox(height: AppSpacing.s1),
                     Text(
                       'Masuk dengan akun MEDINFRAS · IGD & Laboratorium',
-                      style: AppText.caption,
+                      style: context.teks.caption,
                       textAlign: TextAlign.center,
                     ),
                     if (auth.pesan != null) ...[const SizedBox(height: AppSpacing.s4), _Pemberitahuan(auth.pesan!)],
@@ -98,7 +112,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       textInputAction: TextInputAction.next,
                       autofillHints: const [AutofillHints.username],
                       autocorrect: false,
-                      style: AppText.body,
+                      style: context.teks.body,
                       decoration: const InputDecoration(prefixIcon: Icon(Icons.person_outline), hintText: 'mis. D0412'),
                       validator: (v) => (v ?? '').trim().isEmpty ? 'Isi kode dokter atau email.' : null,
                     ),
@@ -112,7 +126,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       textInputAction: TextInputAction.done,
                       autofillHints: const [AutofillHints.password],
                       onFieldSubmitted: (_) => _masuk(),
-                      style: AppText.body,
+                      style: context.teks.body,
                       decoration: InputDecoration(
                         prefixIcon: const Icon(Icons.lock_outline),
                         suffixIcon: IconButton(
@@ -133,7 +147,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                               children: [
                                 Switch(value: _ingat, onChanged: _sibuk ? null : (v) => setState(() => _ingat = v)),
                                 const SizedBox(width: AppSpacing.s2),
-                                Flexible(child: Text('Ingat perangkat', style: AppText.body)),
+                                Flexible(child: Text('Ingat perangkat', style: context.teks.body)),
                               ],
                             ),
                           ),
@@ -145,9 +159,12 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     FilledButton(
                       onPressed: _sibuk ? null : _masuk,
                       child: _sibuk
-                          ? const SizedBox.square(
+                          ? SizedBox.square(
                               dimension: AppSize.icon,
-                              child: CircularProgressIndicator(strokeWidth: AppSize.stroke, color: AppColors.onBrand),
+                              child: CircularProgressIndicator(
+                                strokeWidth: AppSize.stroke,
+                                color: context.warna.onBrand,
+                              ),
                             )
                           : const Text('Masuk'),
                     ),
@@ -156,16 +173,16 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       FilledButton.tonalIcon(
                         onPressed: _sibuk ? null : () => context.go(Routes.pin),
                         style: FilledButton.styleFrom(
-                          backgroundColor: AppColors.brandSoft,
-                          foregroundColor: AppColors.brand,
-                          side: const BorderSide(color: AppColors.brandPastel),
+                          backgroundColor: context.warna.brandSoft,
+                          foregroundColor: context.warna.brand,
+                          side: BorderSide(color: context.warna.brandPastel),
                         ),
                         icon: const Icon(Icons.fingerprint),
                         label: const Text('Masuk dengan biometrik / PIN'),
                       ),
                     ],
                     const SizedBox(height: AppSpacing.s8),
-                    Text('Ciputra Hospital · $_versi', style: AppText.small, textAlign: TextAlign.center),
+                    Text('Ciputra Hospital · $_versi', style: context.teks.small, textAlign: TextAlign.center),
                   ],
                 ),
               ),
@@ -189,10 +206,10 @@ class _Galat extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Icon(Icons.error_outline, size: AppSize.iconSm, color: AppColors.danger),
+          Icon(Icons.error_outline, size: AppSize.iconSm, color: context.warna.danger),
           const SizedBox(width: AppSpacing.s2),
           Expanded(
-            child: Text(pesan, style: AppText.caption.copyWith(color: AppColors.danger)),
+            child: Text(pesan, style: context.teks.caption.copyWith(color: context.warna.danger)),
           ),
         ],
       ),
@@ -210,14 +227,14 @@ class _Pemberitahuan extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.s3),
-      decoration: const BoxDecoration(color: AppColors.amberSoft, borderRadius: BorderRadius.all(AppRadius.md)),
+      decoration: BoxDecoration(color: context.warna.amberSoft, borderRadius: BorderRadius.all(AppRadius.md)),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Icon(Icons.info_outline, size: AppSize.iconSm, color: AppColors.amber),
+          Icon(Icons.info_outline, size: AppSize.iconSm, color: context.warna.amber),
           const SizedBox(width: AppSpacing.s2),
           Expanded(
-            child: Text(pesan, style: AppText.caption.copyWith(color: AppColors.amber)),
+            child: Text(pesan, style: context.teks.caption.copyWith(color: context.warna.amber)),
           ),
         ],
       ),
@@ -238,12 +255,12 @@ class _LupaSandiSheet extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text('Lupa kata sandi', style: AppText.title),
+            Text('Lupa kata sandi', style: context.teks.title),
             const SizedBox(height: AppSpacing.s2),
             Text(
               'Akun aplikasi ini sama dengan akun MEDINFRAS. Untuk mengatur ulang kata sandi, '
               'hubungi IT Ciputra Hospital.',
-              style: AppText.body,
+              style: context.teks.body,
             ),
             const SizedBox(height: AppSpacing.s5),
             FilledButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Tutup')),

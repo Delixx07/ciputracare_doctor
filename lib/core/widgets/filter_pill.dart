@@ -22,11 +22,11 @@ class FilterPill extends StatelessWidget {
       onSelected: (_) => onTap(),
       showCheckmark: false,
       materialTapTargetSize: MaterialTapTargetSize.padded,
-      labelStyle: AppText.caption.copyWith(
-        color: selected ? AppColors.brand : AppColors.ink,
+      labelStyle: context.teks.caption.copyWith(
+        color: selected ? context.warna.brand : context.warna.ink,
         fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
       ),
-      side: BorderSide(color: selected ? AppColors.brand : AppColors.line),
+      side: BorderSide(color: selected ? context.warna.brand : context.warna.line),
     );
   }
 }

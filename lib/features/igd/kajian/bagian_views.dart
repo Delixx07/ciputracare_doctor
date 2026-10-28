@@ -18,11 +18,11 @@ class BagianView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isi = switch (bagian) {
-      BagianKajian.anamnesa => _anamnesa(kajian.anamnesa),
-      BagianKajian.perawat => _perawat(kajian.pengkajianPerawat),
-      BagianKajian.riwayat => _riwayat(kajian.riwayat),
-      BagianKajian.pemeriksaan => _pemeriksaan(kajian.pemeriksaan),
-      BagianKajian.assessment => _assessment(kajian.assessment),
+      BagianKajian.anamnesa => _anamnesa(context, kajian.anamnesa),
+      BagianKajian.perawat => _perawat(context, kajian.pengkajianPerawat),
+      BagianKajian.riwayat => _riwayat(context, kajian.riwayat),
+      BagianKajian.pemeriksaan => _pemeriksaan(context, kajian.pemeriksaan),
+      BagianKajian.assessment => _assessment(context, kajian.assessment),
       BagianKajian.planning => [_PlanningView(kajian.planning)],
     };
     return ListView(
@@ -33,7 +33,7 @@ class BagianView extends StatelessWidget {
 
   // 1. Anamnesa
 
-  List<Widget> _anamnesa(Anamnesa a) => [
+  List<Widget> _anamnesa(BuildContext context, Anamnesa a) => [
     _Kartu(
       children: [
         Row(
@@ -78,7 +78,7 @@ class BagianView extends StatelessWidget {
 
   static const _hurufAbcde = {'Airway': 'A', 'Breathing': 'B', 'Circulation': 'C', 'Disability': 'D', 'Exposure': 'E'};
 
-  List<Widget> _perawat(PengkajianPerawat p) => [
+  List<Widget> _perawat(BuildContext context, PengkajianPerawat p) => [
     _Info(icon: Icons.person_outline, teks: 'Diisi ${p.oleh}'),
     const _Jarak(),
     _Kartu(
@@ -109,7 +109,7 @@ class BagianView extends StatelessWidget {
             title: e.key == 'Disability' ? 'Disability (AVPU)' : e.key,
             trailing: p.isAbnormal(e.key)
                 ? StatusChip(e.value, tone: ChipTone.warn, icon: Icons.warning_amber_rounded)
-                : Text(e.value, style: AppText.body),
+                : Text(e.value, style: context.teks.body),
           ),
       ],
     ),
@@ -117,20 +117,20 @@ class BagianView extends StatelessWidget {
 
   // 3. Riwayat
 
-  List<Widget> _riwayat(Riwayat r) => [
+  List<Widget> _riwayat(BuildContext context, Riwayat r) => [
     const SectionTitle('Riwayat penyakit dahulu'),
     const SizedBox(height: AppSpacing.s3),
     _Kartu(
       children: [
         if (r.penyakitDahulu.isEmpty)
-          Text('Tidak ada', style: AppText.body)
+          Text('Tidak ada', style: context.teks.body)
         else
           Wrap(
             spacing: AppSpacing.s2,
             runSpacing: AppSpacing.s2,
             children: [for (final p in r.penyakitDahulu) StatusChip(p, tone: ChipTone.info)],
           ),
-        if (r.catatan != null && r.catatan!.isNotEmpty) Text(r.catatan!, style: AppText.body),
+        if (r.catatan != null && r.catatan!.isNotEmpty) Text(r.catatan!, style: context.teks.body),
       ],
     ),
     const _Jarak(),
@@ -144,7 +144,7 @@ class BagianView extends StatelessWidget {
                 ListCardItem(
                   title: o.nama,
                   subtitle: o.aturan,
-                  trailing: o.terakhir == null ? null : Text('terakhir ${o.terakhir}', style: AppText.caption),
+                  trailing: o.terakhir == null ? null : Text('terakhir ${o.terakhir}', style: context.teks.caption),
                 ),
             ],
     ),
@@ -159,7 +159,7 @@ class BagianView extends StatelessWidget {
 
   // 4. Pemeriksaan
 
-  List<Widget> _pemeriksaan(Pemeriksaan p) => [
+  List<Widget> _pemeriksaan(BuildContext context, Pemeriksaan p) => [
     const SectionTitle('Tanda vital'),
     const SizedBox(height: AppSpacing.s3),
     _GridVital(p.vital),
@@ -179,18 +179,18 @@ class BagianView extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Expanded(child: Text(f.sistem, style: AppText.bodyStrong)),
+                    Expanded(child: Text(f.sistem, style: context.teks.bodyStrong)),
                     const StatusChip('Abnormal', tone: ChipTone.warn),
                   ],
                 ),
                 const SizedBox(height: AppSpacing.s1),
-                Text(f.temuan, style: AppText.body),
+                Text(f.temuan, style: context.teks.body),
               ],
             ),
           ),
         ListCardItem(
           title: p.fisikAbnormal.isEmpty ? 'Semua sistem' : 'Sistem lain',
-          trailing: Text('Normal', style: AppText.body),
+          trailing: Text('Normal', style: context.teks.body),
         ),
       ],
     ),
@@ -212,7 +212,7 @@ class BagianView extends StatelessWidget {
 
   // 5. Assessment
 
-  List<Widget> _assessment(Assessment a) => [
+  List<Widget> _assessment(BuildContext context, Assessment a) => [
     const SectionTitle('Diagnosa · ICD-10'),
     const SizedBox(height: AppSpacing.s3),
     ListCard(
@@ -327,14 +327,14 @@ class _SelVital extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.s2),
       decoration: BoxDecoration(
-        color: status.isAbnormal ? AppColors.dangerSoft : AppColors.surfaceRaised,
+        color: status.isAbnormal ? context.warna.dangerSoft : context.warna.surfaceRaised,
         borderRadius: const BorderRadius.all(AppRadius.md),
-        border: Border.all(color: status.isAbnormal ? AppColors.dangerSoft : AppColors.line),
+        border: Border.all(color: status.isAbnormal ? context.warna.dangerSoft : context.warna.line),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(label, style: AppText.small, maxLines: 1, overflow: TextOverflow.ellipsis),
+          Text(label, style: context.teks.small, maxLines: 1, overflow: TextOverflow.ellipsis),
           ValueText(nilai, status: status),
         ],
       ),
@@ -353,11 +353,11 @@ class _KartuAlergi extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: AppSpacing.s2),
       padding: const EdgeInsets.all(AppSpacing.s4),
-      decoration: const BoxDecoration(color: AppColors.dangerSoft, borderRadius: BorderRadius.all(AppRadius.lg)),
+      decoration: BoxDecoration(color: context.warna.dangerSoft, borderRadius: BorderRadius.all(AppRadius.lg)),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Icon(Icons.warning_amber_rounded, color: AppColors.danger, size: AppSize.icon),
+          Icon(Icons.warning_amber_rounded, color: context.warna.danger, size: AppSize.icon),
           const SizedBox(width: AppSpacing.s3),
           Expanded(
             child: Column(
@@ -365,10 +365,10 @@ class _KartuAlergi extends StatelessWidget {
               children: [
                 Text(
                   '${alergi.jenis} · ${alergi.nama}',
-                  style: AppText.bodyStrong.copyWith(color: AppColors.dangerStrong),
+                  style: context.teks.bodyStrong.copyWith(color: context.warna.dangerStrong),
                 ),
                 if (detail.isNotEmpty)
-                  Text(detail.join(' · '), style: AppText.caption.copyWith(color: AppColors.danger)),
+                  Text(detail.join(' · '), style: context.teks.caption.copyWith(color: context.warna.danger)),
               ],
             ),
           ),
@@ -407,13 +407,13 @@ class _Info extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.s3),
-      decoration: const BoxDecoration(color: AppColors.brandSoft, borderRadius: BorderRadius.all(AppRadius.md)),
+      decoration: BoxDecoration(color: context.warna.brandSoft, borderRadius: BorderRadius.all(AppRadius.md)),
       child: Row(
         children: [
-          Icon(icon, size: AppSize.iconSm + AppSpacing.s1, color: AppColors.brand),
+          Icon(icon, size: AppSize.iconSm + AppSpacing.s1, color: context.warna.brand),
           const SizedBox(width: AppSpacing.s2),
           Expanded(
-            child: Text(teks, style: AppText.caption.copyWith(color: AppColors.brandStrong)),
+            child: Text(teks, style: context.teks.caption.copyWith(color: context.warna.brandStrong)),
           ),
         ],
       ),
@@ -433,10 +433,10 @@ class _Huruf extends StatelessWidget {
       width: AppSize.icon,
       height: AppSize.icon,
       alignment: Alignment.center,
-      decoration: const BoxDecoration(color: AppColors.surfaceSunken, borderRadius: BorderRadius.all(AppRadius.sm)),
+      decoration: BoxDecoration(color: context.warna.surfaceSunken, borderRadius: BorderRadius.all(AppRadius.sm)),
       child: Text(
         teks,
-        style: AppText.small.copyWith(color: AppColors.ink, fontWeight: FontWeight.w700),
+        style: context.teks.small.copyWith(color: context.warna.ink, fontWeight: FontWeight.w700),
       ),
     );
   }

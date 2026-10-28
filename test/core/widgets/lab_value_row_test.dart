@@ -47,7 +47,7 @@ void main() {
     final material = tester.widget<Material>(
       find.descendant(of: find.byType(LabValueRow), matching: find.byType(Material)).first,
     );
-    expect(material.color, AppColors.dangerSoft);
+    expect(material.color, AppColors.terang.dangerSoft);
     await tester.tap(find.text('GDS'));
     expect(tapped, isTrue);
   });

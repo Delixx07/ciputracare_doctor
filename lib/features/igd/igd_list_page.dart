@@ -39,7 +39,7 @@ class _IgdListPageState extends ConsumerState<IgdListPage> {
     final dokter = ref.watch(authControllerProvider).dokter;
 
     return Scaffold(
-      backgroundColor: AppColors.canvas,
+      backgroundColor: context.warna.canvas,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -87,7 +87,7 @@ class _IgdListPageState extends ConsumerState<IgdListPage> {
         const SizedBox(height: AppSpacing.s3),
         _KolomCari(controller: _cari, onChanged: () => setState(() {})),
         const SizedBox(height: AppSpacing.s4),
-        Text(keterangan, style: AppText.caption),
+        Text(keterangan, style: context.teks.caption),
         const SizedBox(height: AppSpacing.s3),
         if (tampil.isEmpty)
           EmptyState(
@@ -112,21 +112,20 @@ class _KolomCari extends StatelessWidget {
   final TextEditingController controller;
   final VoidCallback onChanged;
 
-  static const _border = OutlineInputBorder(
-    borderRadius: BorderRadius.all(AppRadius.pill),
-    borderSide: BorderSide(color: AppColors.line),
-  );
-
   @override
   Widget build(BuildContext context) {
+    final border = OutlineInputBorder(
+      borderRadius: const BorderRadius.all(AppRadius.pill),
+      borderSide: BorderSide(color: context.warna.line),
+    );
     return TextField(
       controller: controller,
       onChanged: (_) => onChanged(),
       textInputAction: TextInputAction.search,
-      style: AppText.body,
+      style: context.teks.body,
       decoration: InputDecoration(
         filled: true,
-        fillColor: AppColors.surfaceRaised,
+        fillColor: context.warna.surfaceRaised,
         hintText: 'Cari nama, No. RM, atau No. registrasi',
         prefixIcon: const Icon(Icons.search),
         suffixIcon: controller.text.isEmpty
@@ -140,10 +139,10 @@ class _KolomCari extends StatelessWidget {
                 },
               ),
         contentPadding: const EdgeInsets.symmetric(horizontal: AppSpacing.s4, vertical: AppSpacing.s3),
-        border: _border,
-        enabledBorder: _border,
-        focusedBorder: _border.copyWith(
-          borderSide: const BorderSide(color: AppColors.brand, width: AppSize.stroke),
+        border: border,
+        enabledBorder: border,
+        focusedBorder: border.copyWith(
+          borderSide: BorderSide(color: context.warna.brand, width: AppSize.stroke),
         ),
       ),
     );

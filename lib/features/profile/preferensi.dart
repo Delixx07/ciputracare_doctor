@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/providers.dart';
@@ -37,3 +38,26 @@ class PreferensiController extends Notifier<Preferensi> {
 
 /// Perangkat punya biometrik yang bisa dipakai.
 final biometrikTersediaProvider = FutureProvider<bool>((ref) => ref.watch(biometrikServiceProvider).tersedia());
+
+/// Tampilan: ikuti sistem / terang / gelap (lokal di perangkat).
+final temaProvider = NotifierProvider<TemaController, ThemeMode>(TemaController.new);
+
+class TemaController extends Notifier<ThemeMode> {
+  static const _kunci = 'pref_tema';
+
+  @override
+  ThemeMode build() {
+    _muat();
+    return ThemeMode.system;
+  }
+
+  Future<void> _muat() async {
+    final nilai = await ref.read(keyValueStoreProvider).read(_kunci);
+    state = ThemeMode.values.firstWhere((m) => m.name == nilai, orElse: () => ThemeMode.system);
+  }
+
+  Future<void> atur(ThemeMode mode) async {
+    state = mode;
+    await ref.read(keyValueStoreProvider).write(_kunci, mode.name);
+  }
+}

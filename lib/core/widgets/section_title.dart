@@ -18,13 +18,13 @@ class SectionTitle extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.baseline,
         textBaseline: TextBaseline.alphabetic,
         children: [
-          Expanded(flex: 3, child: Text(title, style: AppText.section)),
+          Expanded(flex: 3, child: Text(title, style: context.teks.section)),
           if (trailing != null) ...[
             const SizedBox(width: AppSpacing.s2),
             // Keterangan panjang dibungkus, tidak meluber.
             Flexible(
               flex: 2,
-              child: Text(trailing!, style: AppText.caption, textAlign: TextAlign.end),
+              child: Text(trailing!, style: context.teks.caption, textAlign: TextAlign.end),
             ),
           ],
         ],

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text.dart';
 
-/// Status nilai klinis (vital, lab). Normal = [AppColors.ink]; abnormal = merah + panah.
+/// Status nilai klinis (vital, lab). Normal = ink; abnormal = merah + panah.
 enum ValueStatus {
   normal(null, null),
   tinggi('▲', 'Tinggi'),
@@ -22,7 +22,7 @@ enum ValueStatus {
 
   bool get isAbnormal => this != normal;
 
-  Color get color => isAbnormal ? AppColors.danger : AppColors.ink;
+  Color warna(AppColors c) => isAbnormal ? c.danger : c.ink;
 }
 
 /// Nilai + satuan. Abnormal: berwarna dan diberi panah ▲/▼ (bukan hanya warna).
@@ -43,12 +43,12 @@ class ValueText extends StatelessWidget {
   /// Matikan bila label status ditampilkan terpisah (mis. di [LabValueRow]).
   final bool showArrow;
 
-  /// Default [AppText.vital].
+  /// Default [context.teks.vital].
   final TextStyle? style;
 
   @override
   Widget build(BuildContext context) {
-    final base = (style ?? AppText.vital).copyWith(color: status.color);
+    final base = (style ?? context.teks.vital).copyWith(color: status.warna(context.warna));
     final arrow = showArrow ? status.arrow : null;
     return Text.rich(
       TextSpan(
@@ -57,7 +57,7 @@ class ValueText extends StatelessWidget {
           if (unit != null)
             TextSpan(
               text: ' $unit',
-              style: AppText.small.copyWith(color: status.color),
+              style: context.teks.small.copyWith(color: status.warna(context.warna)),
             ),
           if (arrow != null) TextSpan(text: ' $arrow', style: base),
         ],

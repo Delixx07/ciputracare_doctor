@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
@@ -30,55 +31,63 @@ class PageHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        color: AppColors.brand,
-        border: Border(
-          bottom: BorderSide(color: AppColors.gold, width: AppSize.accentLine),
+    // Header selalu gelap → ikon status bar putih di kedua mode.
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.light,
+      child: Container(
+        decoration: BoxDecoration(
+          color: context.warna.chrome,
+          border: Border(
+            bottom: BorderSide(color: context.warna.gold, width: AppSize.accentLine),
+          ),
         ),
-      ),
-      child: Stack(
-        children: [
-          const Positioned(right: -AppSpacing.s4, bottom: -AppSpacing.s6, child: _PlusDecor()),
-          SafeArea(
-            bottom: false,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(AppSpacing.s4, AppSpacing.s3, AppSpacing.s4, AppSpacing.s4),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      ClipRRect(
-                        borderRadius: const BorderRadius.all(AppRadius.md),
-                        child: Image.asset(
-                          'assets/images/logo_icon.png',
-                          width: AppSize.logo,
-                          height: AppSize.logo,
-                          excludeFromSemantics: true,
+        child: Stack(
+          children: [
+            const Positioned(right: -AppSpacing.s4, bottom: -AppSpacing.s6, child: _PlusDecor()),
+            SafeArea(
+              bottom: false,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(AppSpacing.s4, AppSpacing.s3, AppSpacing.s4, AppSpacing.s4),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        ClipRRect(
+                          borderRadius: const BorderRadius.all(AppRadius.md),
+                          child: Image.asset(
+                            'assets/images/logo_icon.png',
+                            width: AppSize.logo,
+                            height: AppSize.logo,
+                            excludeFromSemantics: true,
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: AppSpacing.s2),
-                      Expanded(
-                        child: Text(
-                          label,
-                          style: AppText.caption.copyWith(color: AppColors.onBrand, fontWeight: FontWeight.w700),
+                        const SizedBox(width: AppSpacing.s2),
+                        Expanded(
+                          child: Text(
+                            label,
+                            style: context.teks.caption.copyWith(
+                              color: context.warna.onChrome,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
                         ),
-                      ),
-                      if (onNotifikasi != null) _BellButton(count: badgeCount, onPressed: onNotifikasi!),
-                    ],
-                  ),
-                  const SizedBox(height: AppSpacing.s3),
-                  Semantics(
-                    header: true,
-                    child: Text(title, style: AppText.titleLg.copyWith(color: AppColors.onBrand)),
-                  ),
-                  if (subtitle != null) Text(subtitle!, style: AppText.caption.copyWith(color: AppColors.onBrandMuted)),
-                ],
+                        if (onNotifikasi != null) _BellButton(count: badgeCount, onPressed: onNotifikasi!),
+                      ],
+                    ),
+                    const SizedBox(height: AppSpacing.s3),
+                    Semantics(
+                      header: true,
+                      child: Text(title, style: context.teks.titleLg.copyWith(color: context.warna.onChrome)),
+                    ),
+                    if (subtitle != null)
+                      Text(subtitle!, style: context.teks.caption.copyWith(color: context.warna.onBrandMuted)),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -106,8 +115,8 @@ class _BellButton extends StatelessWidget {
               child: IconButton(
                 onPressed: onPressed,
                 tooltip: label,
-                style: IconButton.styleFrom(backgroundColor: AppColors.brandDecor),
-                icon: const Icon(Icons.notifications_none, color: AppColors.onBrand, size: AppSize.icon),
+                style: IconButton.styleFrom(backgroundColor: context.warna.brandDecor),
+                icon: Icon(Icons.notifications_none, color: context.warna.onChrome, size: AppSize.icon),
               ),
             ),
             if (count > 0)
@@ -119,13 +128,13 @@ class _BellButton extends StatelessWidget {
                     constraints: const BoxConstraints(minWidth: AppSize.badge, minHeight: AppSize.badge),
                     padding: const EdgeInsets.symmetric(horizontal: AppSpacing.s1),
                     alignment: Alignment.center,
-                    decoration: const BoxDecoration(
-                      color: AppColors.danger,
+                    decoration: BoxDecoration(
+                      color: context.warna.dangerFill,
                       borderRadius: BorderRadius.all(AppRadius.pill),
                     ),
                     child: Text(
                       count > 9 ? '9+' : '$count',
-                      style: AppText.small.copyWith(color: AppColors.onDanger, fontWeight: FontWeight.w700),
+                      style: context.teks.small.copyWith(color: context.warna.onDanger, fontWeight: FontWeight.w700),
                     ),
                   ),
                 ),
@@ -151,13 +160,13 @@ class _PlusDecor extends StatelessWidget {
         dimension: _arm,
         child: Stack(
           alignment: Alignment.center,
-          children: const [
+          children: [
             DecoratedBox(
-              decoration: BoxDecoration(color: AppColors.brandDecor, borderRadius: BorderRadius.all(AppRadius.sm)),
+              decoration: BoxDecoration(color: context.warna.brandDecor, borderRadius: BorderRadius.all(AppRadius.sm)),
               child: SizedBox(width: _width, height: _arm),
             ),
             DecoratedBox(
-              decoration: BoxDecoration(color: AppColors.brandDecor, borderRadius: BorderRadius.all(AppRadius.sm)),
+              decoration: BoxDecoration(color: context.warna.brandDecor, borderRadius: BorderRadius.all(AppRadius.sm)),
               child: SizedBox(width: _arm, height: _width),
             ),
           ],

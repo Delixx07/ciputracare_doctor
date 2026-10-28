@@ -86,4 +86,16 @@ void main() {
     expect(find.text('Selamat datang'), findsOneWidget);
     expect(store.values, isEmpty);
   });
+
+  testWidgets('Tampilan → Gelap: tema berganti & tersimpan lokal', (tester) async {
+    layarPonsel(tester);
+    final store = MemoryKeyValueStore();
+    await pumpApp(tester, auth: sesiMasuk, initial: Routes.profil, store: store);
+    expect(Theme.of(tester.element(find.text('Tampilan'))).brightness, Brightness.light);
+
+    await tester.tap(find.text('Gelap'));
+    await settle(tester);
+    expect(store.values['pref_tema'], 'dark');
+    expect(Theme.of(tester.element(find.text('Tampilan'))).brightness, Brightness.dark);
+  });
 }

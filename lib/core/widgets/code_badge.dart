@@ -14,8 +14,8 @@ class CodeBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.s2, vertical: AppSpacing.s05),
-      decoration: const BoxDecoration(color: AppColors.surfaceSunken, borderRadius: BorderRadius.all(AppRadius.sm)),
-      child: Text(kode, style: AppText.data),
+      decoration: BoxDecoration(color: context.warna.surfaceSunken, borderRadius: BorderRadius.all(AppRadius.sm)),
+      child: Text(kode, style: context.teks.data),
     );
   }
 }

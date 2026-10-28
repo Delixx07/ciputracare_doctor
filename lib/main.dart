@@ -7,6 +7,7 @@ import 'app/kunci_sesi.dart';
 import 'app/router.dart';
 import 'core/theme/app_theme.dart';
 import 'features/auth/auth_controller.dart';
+import 'features/profile/preferensi.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,6 +30,8 @@ class CiputraCareApp extends ConsumerWidget {
       title: 'CiputraCare Doctor',
       debugShowCheckedModeBanner: false,
       theme: buildAppTheme(),
+      darkTheme: buildAppTheme(gelap: true),
+      themeMode: ref.watch(temaProvider),
       routerConfig: ref.watch(routerProvider),
       builder: (context, child) => KunciSesi(child: child ?? const SizedBox()),
     );

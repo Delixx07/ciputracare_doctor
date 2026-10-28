@@ -1,91 +1,110 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'app_colors.dart';
 import 'app_spacing.dart';
 import 'app_text.dart';
 
-ThemeData buildAppTheme() {
-  final base = ThemeData(useMaterial3: true, brightness: Brightness.light);
+/// Tema aplikasi. [gelap] memilih palet [AppColors.gelap]; arti warna sama di kedua mode.
+ThemeData buildAppTheme({bool gelap = false}) {
+  final c = gelap ? AppColors.gelap : AppColors.terang;
+  final t = AppText.dari(c);
+  final brightness = gelap ? Brightness.dark : Brightness.light;
+  final base = ThemeData(useMaterial3: true, brightness: brightness);
+
   return base.copyWith(
-    scaffoldBackgroundColor: AppColors.surface,
-    colorScheme: const ColorScheme.light(
-      primary: AppColors.brand,
-      onPrimary: AppColors.onBrand,
-      secondary: AppColors.brandBright,
-      error: AppColors.danger,
-      onError: AppColors.onDanger,
-      surface: AppColors.surface,
-      onSurface: AppColors.ink,
-      outline: AppColors.line,
+    extensions: [c],
+    scaffoldBackgroundColor: c.surface,
+    colorScheme: ColorScheme.fromSeed(seedColor: c.brand, brightness: brightness).copyWith(
+      primary: c.brand,
+      onPrimary: c.onBrand,
+      secondary: c.brandBright,
+      error: c.danger,
+      onError: c.onDanger,
+      surface: c.surface,
+      onSurface: c.ink,
+      onSurfaceVariant: c.inkMuted,
+      outline: c.line,
+      surfaceContainerHighest: c.surfaceSunken,
     ),
-    textTheme: GoogleFonts.plusJakartaSansTextTheme(
-      base.textTheme,
-    ).apply(bodyColor: AppColors.ink, displayColor: AppColors.ink),
+    textTheme: GoogleFonts.plusJakartaSansTextTheme(base.textTheme).apply(bodyColor: c.ink, displayColor: c.ink),
+    iconTheme: IconThemeData(color: c.ink),
     appBarTheme: AppBarTheme(
-      backgroundColor: AppColors.surfaceRaised,
-      foregroundColor: AppColors.ink,
+      backgroundColor: c.surfaceRaised,
+      foregroundColor: c.ink,
       elevation: 0,
       scrolledUnderElevation: 0,
-      titleTextStyle: AppText.title,
+      titleTextStyle: t.title,
+      // Ikon status bar mengikuti latar app bar.
+      systemOverlayStyle: gelap ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark,
     ),
-    dividerTheme: const DividerThemeData(color: AppColors.line, thickness: 1, space: 1),
-    cardTheme: const CardThemeData(
-      color: AppColors.surfaceRaised,
+    dividerTheme: DividerThemeData(color: c.line, thickness: 1, space: 1),
+    cardTheme: CardThemeData(
+      color: c.surfaceRaised,
       elevation: 0,
       margin: EdgeInsets.zero,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(AppRadius.lg),
-        side: BorderSide(color: AppColors.line),
+        borderRadius: const BorderRadius.all(AppRadius.lg),
+        side: BorderSide(color: c.line),
       ),
     ),
-    navigationBarTheme: NavigationBarThemeData(
-      backgroundColor: AppColors.surfaceRaised,
-      indicatorColor: AppColors.brandSoft,
-      labelTextStyle: WidgetStatePropertyAll(AppText.small.copyWith(color: AppColors.ink)),
+    dialogTheme: DialogThemeData(backgroundColor: c.surfaceRaised, titleTextStyle: t.title, contentTextStyle: t.body),
+    bottomSheetTheme: BottomSheetThemeData(backgroundColor: c.surfaceRaised, dragHandleColor: c.lineStrong),
+    snackBarTheme: SnackBarThemeData(
+      backgroundColor: c.ink,
+      contentTextStyle: t.body.copyWith(color: c.surfaceRaised),
+    ),
+    progressIndicatorTheme: ProgressIndicatorThemeData(color: c.brand),
+    switchTheme: SwitchThemeData(
+      thumbColor: WidgetStateProperty.resolveWith((s) => s.contains(WidgetState.selected) ? c.onBrand : c.lineStrong),
+      trackColor: WidgetStateProperty.resolveWith((s) => s.contains(WidgetState.selected) ? c.brand : c.surfaceSunken),
+      trackOutlineColor: WidgetStateProperty.resolveWith(
+        (s) => s.contains(WidgetState.selected) ? c.brand : c.lineStrong,
+      ),
     ),
     inputDecorationTheme: InputDecorationTheme(
-      border: _inputBorder(AppColors.lineStrong),
-      enabledBorder: _inputBorder(AppColors.lineStrong),
-      focusedBorder: _inputBorder(AppColors.brand, width: AppSize.stroke),
-      errorBorder: _inputBorder(AppColors.danger),
-      focusedErrorBorder: _inputBorder(AppColors.danger, width: AppSize.stroke),
+      border: _inputBorder(c.lineStrong),
+      enabledBorder: _inputBorder(c.lineStrong),
+      focusedBorder: _inputBorder(c.brand, width: AppSize.stroke),
+      errorBorder: _inputBorder(c.danger),
+      focusedErrorBorder: _inputBorder(c.danger, width: AppSize.stroke),
       contentPadding: const EdgeInsets.symmetric(horizontal: AppSpacing.s4, vertical: AppSpacing.s4),
-      hintStyle: AppText.body.copyWith(color: AppColors.inkMuted),
-      errorStyle: AppText.small.copyWith(color: AppColors.danger),
-      prefixIconColor: AppColors.inkMuted,
-      suffixIconColor: AppColors.inkMuted,
+      hintStyle: t.body.copyWith(color: c.inkMuted),
+      errorStyle: t.small.copyWith(color: c.danger),
+      prefixIconColor: c.inkMuted,
+      suffixIconColor: c.inkMuted,
     ),
     filledButtonTheme: FilledButtonThemeData(
       style: FilledButton.styleFrom(
-        backgroundColor: AppColors.brand,
-        foregroundColor: AppColors.onBrand,
+        backgroundColor: c.brand,
+        foregroundColor: c.onBrand,
         minimumSize: const Size.fromHeight(AppSize.button),
-        textStyle: AppText.bodyStrong,
+        textStyle: t.bodyStrong,
         shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(AppRadius.md)),
       ),
     ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        foregroundColor: AppColors.brand,
+        foregroundColor: c.brand,
         minimumSize: const Size(AppSpacing.minTouch, AppSpacing.minTouch),
-        textStyle: AppText.caption.copyWith(fontWeight: FontWeight.w600),
+        textStyle: t.caption.copyWith(fontWeight: FontWeight.w600),
       ),
     ),
     tabBarTheme: TabBarThemeData(
-      labelColor: AppColors.ink,
-      unselectedLabelColor: AppColors.inkMuted,
-      labelStyle: AppText.bodyStrong,
-      unselectedLabelStyle: AppText.body,
-      indicatorColor: AppColors.brand,
+      labelColor: c.ink,
+      unselectedLabelColor: c.inkMuted,
+      labelStyle: t.bodyStrong,
+      unselectedLabelStyle: t.body,
+      indicatorColor: c.brand,
       indicatorSize: TabBarIndicatorSize.tab,
-      dividerColor: AppColors.line,
+      dividerColor: c.line,
     ),
     chipTheme: ChipThemeData(
-      backgroundColor: AppColors.surfaceRaised,
-      selectedColor: AppColors.brandSoft,
-      side: const BorderSide(color: AppColors.line),
-      labelStyle: AppText.caption.copyWith(color: AppColors.ink),
+      backgroundColor: c.surfaceRaised,
+      selectedColor: c.brandSoft,
+      side: BorderSide(color: c.line),
+      labelStyle: t.caption.copyWith(color: c.ink),
       shape: const StadiumBorder(),
     ),
   );

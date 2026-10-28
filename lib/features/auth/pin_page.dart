@@ -128,19 +128,19 @@ class _PinPageState extends ConsumerState<PinPage> {
                     const SizedBox(height: AppSpacing.s6),
                     Image.asset('assets/images/logo_icon.png', height: AppSpacing.s8 * 1.5, excludeFromSemantics: true),
                     const SizedBox(height: AppSpacing.s4),
-                    Semantics(header: true, child: Text(judul, style: AppText.titleLg)),
+                    Semantics(header: true, child: Text(judul, style: context.teks.titleLg)),
                     const SizedBox(height: AppSpacing.s2),
-                    Text(subjudul, style: AppText.caption, textAlign: TextAlign.center),
+                    Text(subjudul, style: context.teks.caption, textAlign: TextAlign.center),
                     const SizedBox(height: AppSpacing.s5),
                     PinDots(panjang: _panjang, terisi: _pin.length, galat: _galat != null),
                     const SizedBox(height: AppSpacing.s3),
                     SizedBox(
-                      height: AppText.caption.fontSize! * 2,
+                      height: context.teks.caption.fontSize! * 2,
                       child: _galat == null
                           ? null
                           : Semantics(
                               liveRegion: true,
-                              child: Text(_galat!, style: AppText.caption.copyWith(color: AppColors.danger)),
+                              child: Text(_galat!, style: context.teks.caption.copyWith(color: context.warna.danger)),
                             ),
                     ),
                     const Spacer(),

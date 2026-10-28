@@ -23,9 +23,9 @@ class SurfaceCard extends StatelessWidget {
     return Container(
       padding: padding,
       decoration: BoxDecoration(
-        color: AppColors.surfaceRaised,
+        color: context.warna.surfaceRaised,
         borderRadius: const BorderRadius.all(AppRadius.lg),
-        border: Border.all(color: AppColors.line),
+        border: Border.all(color: context.warna.line),
         boxShadow: bayangan ? AppShadow.card : null,
       ),
       child: child,

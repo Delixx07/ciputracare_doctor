@@ -70,10 +70,10 @@ class WidgetPreviewPage extends StatelessWidget {
                       subtitle: 'Kevin Hartono · Bed 3 · triage 2',
                       onTap: () => _info(context, 'Buka pasien'),
                     ),
-                    const ListCardItem(
+                    ListCardItem(
                       title: 'Baris tanpa aksi',
                       subtitle: 'Tidak bisa diketuk, tanpa chevron',
-                      subtitleColor: AppColors.amber,
+                      subtitleColor: context.warna.amber,
                     ),
                   ],
                 ),

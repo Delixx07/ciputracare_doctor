@@ -29,7 +29,7 @@ class ProfilPage extends ConsumerWidget {
     final bioTersedia = ref.watch(biometrikTersediaProvider).valueOrNull ?? false;
 
     return Scaffold(
-      backgroundColor: AppColors.canvas,
+      backgroundColor: context.warna.canvas,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -43,12 +43,26 @@ class ProfilPage extends ConsumerWidget {
                 ListCard(
                   children: [
                     ListCardItem(
-                      leading: const Icon(Icons.notifications_none, color: AppColors.goldStrong),
+                      leading: Icon(Icons.notifications_none, color: context.warna.goldStrong),
                       title: 'Notifikasi',
                       subtitle: belum == 0 ? 'Semua sudah dibaca' : '$belum belum dibaca',
                       onTap: () => context.push(Routes.notifikasi),
                     ),
                   ],
+                ),
+                const SizedBox(height: AppSpacing.s6),
+                const SectionTitle('Tampilan'),
+                const SizedBox(height: AppSpacing.s3),
+                SegmentedTabs(
+                  segmen: const [
+                    (label: 'Sistem', count: null),
+                    (label: 'Terang', count: null),
+                    (label: 'Gelap', count: null),
+                  ],
+                  selected: const [ThemeMode.system, ThemeMode.light, ThemeMode.dark].indexOf(ref.watch(temaProvider)),
+                  onChanged: (i) => ref
+                      .read(temaProvider.notifier)
+                      .atur(const [ThemeMode.system, ThemeMode.light, ThemeMode.dark][i]),
                 ),
                 const SizedBox(height: AppSpacing.s6),
                 const SectionTitle('Keamanan dan pemberitahuan'),
@@ -100,9 +114,9 @@ class ProfilPage extends ConsumerWidget {
                   child: FilledButton.tonal(
                     onPressed: () => _keluar(context, ref),
                     style: FilledButton.styleFrom(
-                      backgroundColor: AppColors.surfaceRaised,
-                      foregroundColor: AppColors.danger,
-                      side: const BorderSide(color: AppColors.line),
+                      backgroundColor: context.warna.surfaceRaised,
+                      foregroundColor: context.warna.danger,
+                      side: BorderSide(color: context.warna.line),
                     ),
                     child: const Text('Keluar'),
                   ),
@@ -110,7 +124,7 @@ class ProfilPage extends ConsumerWidget {
                 const SizedBox(height: AppSpacing.s4),
                 Text(
                   'CiputraCare Doctor $_versi · data dari MEDINFRAS (hanya baca)',
-                  style: AppText.small,
+                  style: context.teks.small,
                   textAlign: TextAlign.center,
                 ),
               ],
@@ -131,7 +145,7 @@ class ProfilPage extends ConsumerWidget {
           TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Batal')),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            style: TextButton.styleFrom(foregroundColor: AppColors.danger),
+            style: TextButton.styleFrom(foregroundColor: context.warna.danger),
             child: const Text('Keluar'),
           ),
         ],
@@ -154,20 +168,20 @@ class _KartuDokter extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.s4),
       decoration: BoxDecoration(
-        color: AppColors.surfaceRaised,
+        color: context.warna.surfaceRaised,
         borderRadius: const BorderRadius.all(AppRadius.lg),
-        border: Border.all(color: AppColors.line),
+        border: Border.all(color: context.warna.line),
         boxShadow: AppShadow.card,
       ),
       child: Row(
         children: [
           Container(
             padding: const EdgeInsets.all(AppSpacing.s05),
-            decoration: const BoxDecoration(shape: BoxShape.circle, color: AppColors.gold),
+            decoration: BoxDecoration(shape: BoxShape.circle, color: context.warna.gold),
             child: CircleAvatar(
               radius: AppSpacing.s6 + AppSpacing.s1,
-              backgroundColor: AppColors.brandSoft,
-              child: Text(inisial, style: AppText.title.copyWith(color: AppColors.brand)),
+              backgroundColor: context.warna.brandSoft,
+              child: Text(inisial, style: context.teks.title.copyWith(color: context.warna.brand)),
             ),
           ),
           const SizedBox(width: AppSpacing.s4),
@@ -175,15 +189,15 @@ class _KartuDokter extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(dokter.nama, style: AppText.title),
+                Text(dokter.nama, style: context.teks.title),
                 Text.rich(
                   TextSpan(
-                    style: AppText.caption,
+                    style: context.teks.caption,
                     children: [
                       TextSpan(text: 'Dokter ${dokter.unit} · kode '),
                       TextSpan(
                         text: dokter.kode,
-                        style: AppText.data.copyWith(color: AppColors.inkMuted),
+                        style: context.teks.data.copyWith(color: context.warna.inkMuted),
                       ),
                     ],
                   ),
@@ -191,7 +205,7 @@ class _KartuDokter extends StatelessWidget {
                 if (shift != null && shift.isNotEmpty)
                   Text(
                     '${dokter.unit} · shift ${shift[0].toLowerCase()}${shift.substring(1)}',
-                    style: AppText.caption.copyWith(color: AppColors.ink, fontWeight: FontWeight.w600),
+                    style: context.teks.caption.copyWith(color: context.warna.ink, fontWeight: FontWeight.w600),
                   ),
               ],
             ),

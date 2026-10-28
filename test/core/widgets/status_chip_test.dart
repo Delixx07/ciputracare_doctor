@@ -12,20 +12,20 @@ BoxDecoration _decoration(WidgetTester tester) =>
 void main() {
   testWidgets('nada lembut: latar soft, teks berwarna, ikon tampil', (tester) async {
     await pumpThemed(tester, const StatusChip('Terverifikasi', tone: ChipTone.success, icon: Icons.check));
-    expect(_decoration(tester).color, AppColors.successSoft);
-    expect(tester.widget<Text>(find.text('Terverifikasi')).style?.color, AppColors.success);
+    expect(_decoration(tester).color, AppColors.terang.successSoft);
+    expect(tester.widget<Text>(find.text('Terverifikasi')).style?.color, AppColors.terang.success);
     expect(find.byIcon(Icons.check), findsOneWidget);
   });
 
   testWidgets('filled: latar penuh, teks putih', (tester) async {
     await pumpThemed(tester, const StatusChip('Kritis', tone: ChipTone.danger, filled: true));
-    expect(_decoration(tester).color, AppColors.danger);
-    expect(tester.widget<Text>(find.text('Kritis')).style?.color, AppColors.onDanger);
+    expect(_decoration(tester).color, AppColors.terang.danger);
+    expect(tester.widget<Text>(find.text('Kritis')).style?.color, AppColors.terang.onDanger);
   });
 
   testWidgets('default netral tanpa ikon', (tester) async {
     await pumpThemed(tester, const StatusChip('EWS 2'));
-    expect(_decoration(tester).color, AppColors.surfaceSunken);
+    expect(_decoration(tester).color, AppColors.terang.surfaceSunken);
     expect(find.byType(Icon), findsNothing);
   });
 }

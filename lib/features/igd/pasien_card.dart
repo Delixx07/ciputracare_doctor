@@ -19,10 +19,10 @@ class PasienCard extends StatelessWidget {
     return Container(
       decoration: const BoxDecoration(borderRadius: BorderRadius.all(AppRadius.lg), boxShadow: AppShadow.card),
       child: Material(
-        color: AppColors.surfaceRaised,
-        shape: const RoundedRectangleBorder(
+        color: context.warna.surfaceRaised,
+        shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(AppRadius.lg),
-          side: BorderSide(color: AppColors.line),
+          side: BorderSide(color: context.warna.line),
         ),
         clipBehavior: Clip.antiAlias,
         child: InkWell(
@@ -42,18 +42,21 @@ class PasienCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.baseline,
                         textBaseline: TextBaseline.alphabetic,
                         children: [
-                          Expanded(child: Text(p.nama, style: AppText.title)),
+                          Expanded(child: Text(p.nama, style: context.teks.title)),
                           const SizedBox(width: AppSpacing.s2),
-                          Text(p.bed, style: AppText.bodyStrong),
+                          Text(p.bed, style: context.teks.bodyStrong),
                         ],
                       ),
-                      Text('${p.umur} · ${p.jk} · datang ${p.datang}', style: AppText.caption),
+                      Text('${p.umur} · ${p.jk} · datang ${p.datang}', style: context.teks.caption),
                       const SizedBox(height: AppSpacing.s1),
-                      Text(p.keluhan, style: AppText.body),
+                      Text(p.keluhan, style: context.teks.body),
                       const SizedBox(height: AppSpacing.s1),
                       Text(
                         p.status,
-                        style: AppText.small.copyWith(color: _warnaStatus(p.statusTone), fontWeight: FontWeight.w700),
+                        style: context.teks.small.copyWith(
+                          color: _warnaStatus(p.statusTone, context.warna),
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                     ],
                   ),
@@ -67,9 +70,9 @@ class PasienCard extends StatelessWidget {
   }
 
   /// Kuning = menunggu / belum diisi, hijau = siap/selesai, lab = netral tebal.
-  static Color _warnaStatus(StatusTone tone) => switch (tone) {
-    StatusTone.warn || StatusTone.todo => AppColors.amber,
-    StatusTone.done => AppColors.success,
-    StatusTone.lab => AppColors.ink,
+  static Color _warnaStatus(StatusTone tone, AppColors c) => switch (tone) {
+    StatusTone.warn || StatusTone.todo => c.amber,
+    StatusTone.done => c.success,
+    StatusTone.lab => c.ink,
   };
 }

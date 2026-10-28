@@ -31,16 +31,16 @@ class _HasilHariIniPageState extends ConsumerState<HasilHariIniPage> {
     final selesai = lab.valueOrNull?.order.where((o) => o.selesai).length;
 
     return Scaffold(
-      backgroundColor: AppColors.canvas,
+      backgroundColor: context.warna.canvas,
       appBar: AppBar(
         titleSpacing: context.canPop() ? 0 : AppSpacing.s4,
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Hasil lab hari ini', style: AppText.title),
+            Text('Hasil lab hari ini', style: context.teks.title),
             Text(
               [?h?.nama, ?h?.bed, if (selesai != null) '$selesai order selesai'].join(' · '),
-              style: AppText.caption,
+              style: context.teks.caption,
               overflow: TextOverflow.ellipsis,
             ),
           ],

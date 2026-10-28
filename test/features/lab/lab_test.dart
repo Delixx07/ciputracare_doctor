@@ -43,10 +43,10 @@ void main() {
     });
 
     test('warna status order', () {
-      expect(warnaStatusOrder(_o(2, 'Menunggu', [])), AppColors.amber);
-      expect(warnaStatusOrder(_o(4, '1 kritis', [])), AppColors.danger);
-      expect(warnaStatusOrder(_o(4, '8 di luar rujukan', [])), AppColors.danger);
-      expect(warnaStatusOrder(_o(4, 'Normal', [])), AppColors.success);
+      expect(warnaStatusOrder(_o(2, 'Menunggu', []), AppColors.terang), AppColors.terang.amber);
+      expect(warnaStatusOrder(_o(4, '1 kritis', []), AppColors.terang), AppColors.terang.danger);
+      expect(warnaStatusOrder(_o(4, '8 di luar rujukan', []), AppColors.terang), AppColors.terang.danger);
+      expect(warnaStatusOrder(_o(4, 'Normal', []), AppColors.terang), AppColors.terang.success);
     });
 
     test('urutan hasil: kritis, di luar rujukan, normal; flag → status nilai', () {

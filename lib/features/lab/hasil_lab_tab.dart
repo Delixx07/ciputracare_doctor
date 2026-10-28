@@ -72,10 +72,10 @@ class _HasilLabTabState extends ConsumerState<HasilLabTab> {
         ListCard(
           children: [
             ListCardItem(
-              leading: const Icon(Icons.fact_check_outlined, color: AppColors.brand),
+              leading: Icon(Icons.fact_check_outlined, color: context.warna.brand),
               title: 'Semua nilai hari ini',
               subtitle: '${l.hasil.length} nilai · $luar di luar rujukan',
-              subtitleColor: luar > 0 ? AppColors.danger : null,
+              subtitleColor: luar > 0 ? context.warna.danger : null,
               onTap: () => context.push(Routes.labHariIni(widget.noReg)),
             ),
           ],
@@ -109,15 +109,18 @@ class _HasilLabTabState extends ConsumerState<HasilLabTab> {
                 children: [
                   Row(
                     children: [
-                      Expanded(child: Text(p.pemeriksaan, style: AppText.bodyStrong)),
+                      Expanded(child: Text(p.pemeriksaan, style: context.teks.bodyStrong)),
                       StatusChip(
                         p.status,
                         tone: p.status.toLowerCase().startsWith('selesai') ? ChipTone.success : ChipTone.warn,
                       ),
                     ],
                   ),
-                  if (p.dipesan != null) Text('Dipesan ${p.dipesan}', style: AppText.small),
-                  if (p.hasil != null) ...[const SizedBox(height: AppSpacing.s2), Text(p.hasil!, style: AppText.body)],
+                  if (p.dipesan != null) Text('Dipesan ${p.dipesan}', style: context.teks.small),
+                  if (p.hasil != null) ...[
+                    const SizedBox(height: AppSpacing.s2),
+                    Text(p.hasil!, style: context.teks.body),
+                  ],
                 ],
               ),
             ),
@@ -136,9 +139,9 @@ class BannerKritis extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final belum = kritis.statusKonfirmasi.toLowerCase().startsWith('belum');
-    final fg = belum ? AppColors.onDanger : AppColors.dangerStrong;
+    final fg = belum ? context.warna.onDanger : context.warna.dangerStrong;
     return Material(
-      color: belum ? AppColors.danger : AppColors.dangerSoft,
+      color: belum ? context.warna.dangerFill : context.warna.dangerSoft,
       borderRadius: const BorderRadius.all(AppRadius.md),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
@@ -153,10 +156,10 @@ class BannerKritis extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Kritis: ${kritis.item} ${kritis.nilai}', style: AppText.section.copyWith(color: fg)),
+                    Text('Kritis: ${kritis.item} ${kritis.nilai}', style: context.teks.section.copyWith(color: fg)),
                     Text(
                       'Lab ${kritis.dilaporkan} · ${kritis.statusKonfirmasi.toLowerCase()}',
-                      style: AppText.caption.copyWith(color: fg),
+                      style: context.teks.caption.copyWith(color: fg),
                     ),
                   ],
                 ),

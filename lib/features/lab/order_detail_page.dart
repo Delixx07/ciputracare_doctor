@@ -26,20 +26,20 @@ class OrderDetailPage extends ConsumerWidget {
     final order = lab.valueOrNull?.order.where((o) => o.noTrx == noTrx).firstOrNull;
 
     return Scaffold(
-      backgroundColor: AppColors.canvas,
+      backgroundColor: context.warna.canvas,
       appBar: AppBar(
         titleSpacing: context.canPop() ? 0 : AppSpacing.s4,
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(order?.judul ?? 'Order lab', style: AppText.title, overflow: TextOverflow.ellipsis),
+            Text(order?.judul ?? 'Order lab', style: context.teks.title, overflow: TextOverflow.ellipsis),
             Text.rich(
               TextSpan(
-                style: AppText.caption,
+                style: context.teks.caption,
                 children: [
                   TextSpan(
                     text: noTrx,
-                    style: AppText.data.copyWith(color: AppColors.inkMuted),
+                    style: context.teks.data.copyWith(color: context.warna.inkMuted),
                   ),
                   if (nama != null) TextSpan(text: ' · $nama'),
                 ],
@@ -83,7 +83,7 @@ class _Isi extends StatelessWidget {
       children: [
         Container(
           padding: const EdgeInsets.all(AppSpacing.s4),
-          decoration: const BoxDecoration(color: AppColors.surfaceSunken, borderRadius: BorderRadius.all(AppRadius.md)),
+          decoration: BoxDecoration(color: context.warna.surfaceSunken, borderRadius: BorderRadius.all(AppRadius.md)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -96,10 +96,10 @@ class _Isi extends StatelessWidget {
                       children: [
                         SizedBox(
                           width: AppSpacing.s8 * 3,
-                          child: Text(label, style: AppText.caption),
+                          child: Text(label, style: context.teks.caption),
                         ),
                         Expanded(
-                          child: Text(nilai, style: AppText.caption.copyWith(color: AppColors.ink)),
+                          child: Text(nilai, style: context.teks.caption.copyWith(color: context.warna.ink)),
                         ),
                       ],
                     ),
@@ -166,12 +166,12 @@ class _Tahapan extends StatelessWidget {
                     children: [
                       Text(
                         OrderLab.namaTahap[i],
-                        style: AppText.small.copyWith(
-                          color: i < order.tahap ? AppColors.ink : AppColors.inkMuted,
+                        style: context.teks.small.copyWith(
+                          color: i < order.tahap ? context.warna.ink : context.warna.inkMuted,
                           fontWeight: i < order.tahap ? FontWeight.w700 : FontWeight.w500,
                         ),
                       ),
-                      Text((i < order.waktu.length ? order.waktu[i] : null) ?? '–', style: AppText.small),
+                      Text((i < order.waktu.length ? order.waktu[i] : null) ?? '–', style: context.teks.small),
                     ],
                   ),
                 ),

@@ -70,7 +70,7 @@ class _KartuStatus extends StatelessWidget {
         children: [
           Icon(
             belum ? Icons.pending_actions_outlined : Icons.task_alt,
-            color: belum ? AppColors.amber : AppColors.success,
+            color: belum ? context.warna.amber : context.warna.success,
             size: AppSize.icon,
           ),
           const SizedBox(width: AppSpacing.s3),
@@ -78,8 +78,8 @@ class _KartuStatus extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Status disposisi', style: AppText.section),
-                Text('Diproses di Medinfras', style: AppText.small),
+                Text('Status disposisi', style: context.teks.section),
+                Text('Diproses di Medinfras', style: context.teks.small),
               ],
             ),
           ),
@@ -100,13 +100,13 @@ class _BannerCatatan extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(AppSpacing.s4, AppSpacing.s2, AppSpacing.s2, AppSpacing.s2),
-      decoration: const BoxDecoration(color: AppColors.amberSoft, borderRadius: BorderRadius.all(AppRadius.md)),
+      decoration: BoxDecoration(color: context.warna.amberSoft, borderRadius: BorderRadius.all(AppRadius.md)),
       child: Row(
         children: [
-          const Icon(Icons.info_outline, color: AppColors.amber, size: AppSize.icon),
+          Icon(Icons.info_outline, color: context.warna.amber, size: AppSize.icon),
           const SizedBox(width: AppSpacing.s3),
           Expanded(
-            child: Text(catatan, style: AppText.bodyStrong.copyWith(color: AppColors.amber)),
+            child: Text(catatan, style: context.teks.bodyStrong.copyWith(color: context.warna.amber)),
           ),
           TextButton(
             onPressed: () => DefaultTabController.of(context).animateTo(PasienTab.lab.index),
@@ -167,7 +167,7 @@ class _Diagnosa extends StatelessWidget {
                 ListCardItem(
                   leading: CodeBadge(x.kode),
                   title: x.nama,
-                  trailing: Text(x.tipe, style: AppText.caption),
+                  trailing: Text(x.tipe, style: context.teks.caption),
                 ),
             ],
     );

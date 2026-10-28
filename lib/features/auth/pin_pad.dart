@@ -14,7 +14,7 @@ class PinDots extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final warna = galat ? AppColors.danger : AppColors.brand;
+    final warna = galat ? context.warna.danger : context.warna.brand;
     return Semantics(
       label: '$terisi dari $panjang digit',
       excludeSemantics: true,
@@ -30,7 +30,9 @@ class PinDots extends StatelessWidget {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: i < terisi ? warna : null,
-                  border: Border.all(color: i < terisi ? warna : (galat ? AppColors.danger : AppColors.lineStrong)),
+                  border: Border.all(
+                    color: i < terisi ? warna : (galat ? context.warna.danger : context.warna.lineStrong),
+                  ),
                 ),
               ),
             ),
@@ -70,7 +72,7 @@ class PinKeypad extends StatelessWidget {
             child: IconButton(
               tooltip: 'Hapus',
               onPressed: enabled ? onHapus : null,
-              icon: const Icon(Icons.backspace_outlined, color: AppColors.ink),
+              icon: Icon(Icons.backspace_outlined, color: context.warna.ink),
             ),
           ),
         ]),
@@ -88,7 +90,7 @@ class _Tombol extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: AppColors.brandSoft,
+      color: context.warna.brandSoft,
       shape: const StadiumBorder(),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
@@ -97,7 +99,7 @@ class _Tombol extends StatelessWidget {
           width: AppSize.pinKeyWidth,
           height: AppSize.pinKeyHeight,
           child: Center(
-            child: Text(label, style: AppText.titleLg.copyWith(fontWeight: FontWeight.w600)),
+            child: Text(label, style: context.teks.titleLg.copyWith(fontWeight: FontWeight.w600)),
           ),
         ),
       ),

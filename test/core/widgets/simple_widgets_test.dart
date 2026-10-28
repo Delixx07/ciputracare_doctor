@@ -14,7 +14,7 @@ void main() {
   group('SectionTitle', () {
     testWidgets('judul tebal 15 + keterangan kanan', (tester) async {
       await pumpThemed(tester, const SectionTitle('Order hari ini', trailing: '4 order'));
-      expect(tester.widget<Text>(find.text('Order hari ini')).style?.fontSize, AppText.section.fontSize);
+      expect(tester.widget<Text>(find.text('Order hari ini')).style?.fontSize, AppText.terang.section.fontSize);
       expect(find.text('4 order'), findsOneWidget);
     });
   });
@@ -23,7 +23,7 @@ void main() {
     testWidgets('label + isi; data memakai huruf mono', (tester) async {
       await pumpThemed(tester, const InfoRow(label: 'No. RM', value: '00-03-17-42', data: true));
       expect(find.text('No. RM'), findsOneWidget);
-      expect(tester.widget<Text>(find.text('00-03-17-42')).style, AppText.data);
+      expect(tester.widget<Text>(find.text('00-03-17-42')).style, AppText.terang.data);
     });
 
     testWidgets('isi kosong ditulis –', (tester) async {
@@ -62,7 +62,7 @@ void main() {
       expect(find.text('Perawat · 1'), findsOneWidget);
       final chip = tester.widget<ChoiceChip>(find.byType(ChoiceChip));
       expect(chip.selected, isTrue);
-      expect(chip.side?.color, AppColors.brand);
+      expect(chip.side?.color, AppColors.terang.brand);
       await tester.tap(find.text('Perawat · 1'));
       expect(diketuk, 1);
       expect(tester.getSize(find.byType(ChoiceChip)).height, greaterThanOrEqualTo(AppSpacing.minTouch));
@@ -78,14 +78,14 @@ void main() {
     testWidgets('kartu putih bergaris tepi; bayangan opsional', (tester) async {
       await pumpThemed(tester, const SurfaceCard(bayangan: true, child: Text('isi')));
       final dekor = tester.widget<Container>(find.byType(Container).first).decoration! as BoxDecoration;
-      expect(dekor.color, AppColors.surfaceRaised);
+      expect(dekor.color, AppColors.terang.surfaceRaised);
       expect(dekor.boxShadow, isNotEmpty);
       expect(find.text('isi'), findsOneWidget);
     });
 
     testWidgets('kode ICD memakai huruf data', (tester) async {
       await pumpThemed(tester, const CodeBadge('A09.0'));
-      expect(tester.widget<Text>(find.text('A09.0')).style, AppText.data);
+      expect(tester.widget<Text>(find.text('A09.0')).style, AppText.terang.data);
     });
   });
 }

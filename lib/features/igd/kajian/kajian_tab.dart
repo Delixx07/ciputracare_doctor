@@ -91,17 +91,20 @@ class _SelTriage extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: AppSpacing.s2),
       decoration: BoxDecoration(
-        color: aktif ? tone.foreground : AppColors.surfaceRaised,
+        color: aktif ? tone.foreground(context.warna) : context.warna.surfaceRaised,
         borderRadius: const BorderRadius.all(AppRadius.md),
-        border: Border.all(color: aktif ? tone.foreground : AppColors.line),
+        border: Border.all(color: aktif ? tone.foreground(context.warna) : context.warna.line),
       ),
       child: Column(
         children: [
-          Text('$level', style: AppText.section.copyWith(color: aktif ? AppColors.onBrand : AppColors.inkMuted)),
+          Text(
+            '$level',
+            style: context.teks.section.copyWith(color: aktif ? context.warna.onBrand : context.warna.inkMuted),
+          ),
           Text(
             namaTriage(level),
-            style: AppText.small.copyWith(
-              color: aktif ? AppColors.onBrand : AppColors.inkMuted,
+            style: context.teks.small.copyWith(
+              color: aktif ? context.warna.onBrand : context.warna.inkMuted,
               fontWeight: aktif ? FontWeight.w700 : FontWeight.w500,
             ),
             maxLines: 1,
@@ -132,8 +135,8 @@ class _Kelengkapan extends StatelessWidget {
           child: LinearProgressIndicator(
             value: lengkap / total,
             minHeight: AppSpacing.s1 + AppSpacing.s05,
-            backgroundColor: AppColors.line,
-            color: lengkap == total ? AppColors.success : AppColors.brand,
+            backgroundColor: context.warna.line,
+            color: lengkap == total ? context.warna.success : context.warna.brand,
           ),
         ),
       ],
@@ -156,17 +159,20 @@ class _BarisBagian extends StatelessWidget {
         width: AppSize.icon,
         height: AppSize.icon,
         alignment: Alignment.center,
-        decoration: BoxDecoration(shape: BoxShape.circle, color: lengkap ? AppColors.successSoft : AppColors.brand),
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: lengkap ? context.warna.successSoft : context.warna.brand,
+        ),
         child: lengkap
-            ? const Icon(Icons.check, size: AppSize.iconSm, color: AppColors.success)
+            ? Icon(Icons.check, size: AppSize.iconSm, color: context.warna.success)
             : Text(
                 '${bagian.nomor}',
-                style: AppText.small.copyWith(color: AppColors.onBrand, fontWeight: FontWeight.w700),
+                style: context.teks.small.copyWith(color: context.warna.onBrand, fontWeight: FontWeight.w700),
               ),
       ),
       title: bagian.judulDaftar,
       subtitle: lengkap ? bagian.ringkasan(kajian) : 'Belum lengkap di Medinfras',
-      subtitleColor: lengkap ? null : AppColors.amber,
+      subtitleColor: lengkap ? null : context.warna.amber,
       onTap: onTap,
     );
   }

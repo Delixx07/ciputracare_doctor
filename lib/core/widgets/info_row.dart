@@ -18,9 +18,9 @@ class InfoRow extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(label, style: AppText.small),
+          Text(label, style: context.teks.small),
           const SizedBox(height: AppSpacing.s1),
-          Text(value.isEmpty ? '–' : value, style: data ? AppText.data : AppText.body),
+          Text(value.isEmpty ? '–' : value, style: data ? context.teks.data : context.teks.body),
         ],
       ),
     );

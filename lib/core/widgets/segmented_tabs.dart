@@ -19,7 +19,7 @@ class SegmentedTabs extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.s1),
-      decoration: const BoxDecoration(color: AppColors.brandSoft, borderRadius: BorderRadius.all(AppRadius.pill)),
+      decoration: BoxDecoration(color: context.warna.brandSoft, borderRadius: BorderRadius.all(AppRadius.pill)),
       child: Row(
         children: [
           for (var i = 0; i < segmen.length; i++)
@@ -41,7 +41,7 @@ class _Item extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fg = selected ? AppColors.onBrand : AppColors.brand;
+    final fg = selected ? context.warna.onBrand : context.warna.brand;
     final count = segmen.count;
     return Semantics(
       button: true,
@@ -49,7 +49,7 @@ class _Item extends StatelessWidget {
       label: count == null ? segmen.label : '${segmen.label}, $count',
       excludeSemantics: true,
       child: Material(
-        color: selected ? AppColors.brand : Colors.transparent,
+        color: selected ? context.warna.brand : Colors.transparent,
         shape: const StadiumBorder(),
         clipBehavior: Clip.antiAlias,
         child: InkWell(
@@ -62,7 +62,7 @@ class _Item extends StatelessWidget {
                 Flexible(
                   child: Text(
                     segmen.label,
-                    style: AppText.bodyStrong.copyWith(color: fg),
+                    style: context.teks.bodyStrong.copyWith(color: fg),
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
@@ -71,12 +71,12 @@ class _Item extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: AppSpacing.s1 + AppSpacing.s05),
                     decoration: BoxDecoration(
-                      color: selected ? AppColors.onBrand : AppColors.surfaceRaised,
+                      color: selected ? context.warna.onBrand : context.warna.surfaceRaised,
                       borderRadius: const BorderRadius.all(AppRadius.pill),
                     ),
                     child: Text(
                       '$count',
-                      style: AppText.small.copyWith(color: AppColors.brand, fontWeight: FontWeight.w700),
+                      style: context.teks.small.copyWith(color: context.warna.brand, fontWeight: FontWeight.w700),
                     ),
                   ),
                 ],

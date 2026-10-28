@@ -41,7 +41,7 @@ class AppTabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: AppColors.brandStrong,
+      color: context.warna.chromeStrong,
       child: SafeArea(
         top: false,
         child: SizedBox(
@@ -83,7 +83,7 @@ class _TabItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final warna = selected ? AppColors.onBrand : AppColors.onBrandSubtle;
+    final warna = selected ? context.warna.onChrome : context.warna.onBrandSubtle;
     return Semantics(
       button: true,
       selected: selected,
@@ -97,8 +97,8 @@ class _TabItem extends StatelessWidget {
               duration: const Duration(milliseconds: 200),
               width: selected ? AppSize.tabMarker : 0,
               height: AppSize.accentLine,
-              decoration: const BoxDecoration(
-                color: AppColors.gold,
+              decoration: BoxDecoration(
+                color: context.warna.gold,
                 borderRadius: BorderRadius.vertical(bottom: AppRadius.sm),
               ),
             ),
@@ -107,7 +107,10 @@ class _TabItem extends StatelessWidget {
             const SizedBox(height: AppSpacing.s1),
             Text(
               label,
-              style: AppText.small.copyWith(color: warna, fontWeight: selected ? FontWeight.w700 : FontWeight.w500),
+              style: context.teks.small.copyWith(
+                color: warna,
+                fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
+              ),
             ),
             const Spacer(),
           ],

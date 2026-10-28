@@ -21,12 +21,12 @@ class EmptyState extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, size: AppSize.iconLg, color: AppColors.lineStrong),
+            Icon(icon, size: AppSize.iconLg, color: context.warna.lineStrong),
             const SizedBox(height: AppSpacing.s3),
-            Text(title, style: AppText.section, textAlign: TextAlign.center),
+            Text(title, style: context.teks.section, textAlign: TextAlign.center),
             if (message != null) ...[
               const SizedBox(height: AppSpacing.s1),
-              Text(message!, style: AppText.caption, textAlign: TextAlign.center),
+              Text(message!, style: context.teks.caption, textAlign: TextAlign.center),
             ],
             if (onRetry != null) ...[
               const SizedBox(height: AppSpacing.s4),
@@ -34,9 +34,9 @@ class EmptyState extends StatelessWidget {
                 onPressed: onRetry,
                 style: OutlinedButton.styleFrom(
                   minimumSize: const Size(0, AppSpacing.minTouch),
-                  foregroundColor: AppColors.brand,
-                  side: const BorderSide(color: AppColors.line),
-                  textStyle: AppText.bodyStrong,
+                  foregroundColor: context.warna.brand,
+                  side: BorderSide(color: context.warna.line),
+                  textStyle: context.teks.bodyStrong,
                 ),
                 child: const Text('Coba lagi'),
               ),

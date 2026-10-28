@@ -43,16 +43,16 @@ class _KajianDetailPageState extends ConsumerState<KajianDetailPage> {
     final total = BagianKajian.values.length;
 
     return Scaffold(
-      backgroundColor: AppColors.canvas,
+      backgroundColor: context.warna.canvas,
       appBar: AppBar(
         titleSpacing: context.canPop() ? 0 : AppSpacing.s4,
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(_bagian.judul, style: AppText.title),
+            Text(_bagian.judul, style: context.teks.title),
             Text(
               ['Kajian awal ${_bagian.nomor}/$total', ?nama].join(' · '),
-              style: AppText.caption,
+              style: context.teks.caption,
               overflow: TextOverflow.ellipsis,
             ),
           ],
@@ -106,7 +106,7 @@ class _Progres extends StatelessWidget {
                   duration: const Duration(milliseconds: 200),
                   height: AppSpacing.s1,
                   decoration: BoxDecoration(
-                    color: i <= aktif ? AppColors.brand : AppColors.line,
+                    color: i <= aktif ? context.warna.brand : context.warna.line,
                     borderRadius: const BorderRadius.all(AppRadius.pill),
                   ),
                 ),
@@ -130,12 +130,12 @@ class _NavBawah extends StatelessWidget {
   Widget build(BuildContext context) {
     final terakhir = bagian == BagianKajian.values.last;
     return Material(
-      color: AppColors.surfaceRaised,
+      color: context.warna.surfaceRaised,
       child: SafeArea(
         top: false,
         child: Container(
-          decoration: const BoxDecoration(
-            border: Border(top: BorderSide(color: AppColors.line)),
+          decoration: BoxDecoration(
+            border: Border(top: BorderSide(color: context.warna.line)),
           ),
           padding: const EdgeInsets.fromLTRB(AppSpacing.s4, AppSpacing.s3, AppSpacing.s4, AppSpacing.s3),
           child: Row(
@@ -143,7 +143,10 @@ class _NavBawah extends StatelessWidget {
               Expanded(
                 child: FilledButton.tonal(
                   onPressed: onSebelumnya,
-                  style: FilledButton.styleFrom(backgroundColor: AppColors.brandSoft, foregroundColor: AppColors.brand),
+                  style: FilledButton.styleFrom(
+                    backgroundColor: context.warna.brandSoft,
+                    foregroundColor: context.warna.brand,
+                  ),
                   child: const Text('Sebelumnya'),
                 ),
               ),

@@ -51,7 +51,7 @@ class PasienPage extends ConsumerWidget {
         children: [
           PatientHeader(header: h),
           Material(
-            color: AppColors.surfaceRaised,
+            color: context.warna.surfaceRaised,
             child: TabBar(
               isScrollable: true,
               tabAlignment: TabAlignment.start,
@@ -76,7 +76,7 @@ class PasienPage extends ConsumerWidget {
       length: PasienTab.values.length,
       initialIndex: initialTab.index,
       child: Scaffold(
-        backgroundColor: AppColors.canvas,
+        backgroundColor: context.warna.canvas,
         appBar: AppBar(
           // Rapat ke tombol kembali; tanpa tombol kembali tetap berjarak gutter.
           titleSpacing: context.canPop() ? 0 : AppSpacing.s4,
@@ -100,15 +100,15 @@ class _JudulPasien extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(h.nama, style: AppText.title, overflow: TextOverflow.ellipsis),
+        Text(h.nama, style: context.teks.title, overflow: TextOverflow.ellipsis),
         Text.rich(
           TextSpan(
-            style: AppText.caption,
+            style: context.teks.caption,
             children: [
               TextSpan(text: '${h.bed} · ${h.umur} · ${h.jk} · RM '),
               TextSpan(
                 text: h.noRm,
-                style: AppText.data.copyWith(color: AppColors.inkMuted),
+                style: context.teks.data.copyWith(color: context.warna.inkMuted),
               ),
             ],
           ),
@@ -130,7 +130,7 @@ class _LoncengNotifikasi extends ConsumerWidget {
       onPressed: () => context.push(Routes.notifikasi),
       icon: Badge(
         isLabelVisible: jumlah > 0,
-        backgroundColor: AppColors.danger,
+        backgroundColor: context.warna.dangerFill,
         label: Text('$jumlah'),
         child: const Icon(Icons.notifications_none),
       ),

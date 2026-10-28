@@ -20,6 +20,10 @@ Sekarang aplikasi memakai **data contoh fiktif** (`assets/mock/*.json`).
 - "Ingat perangkat" aktif → buat PIN 6 digit (disimpan lokal, di-hash) → berikutnya buka dengan PIN/biometrik.
 - Rekam lengkap hanya ada untuk **Hendra Kusuma** (Bed 2); pasien lain menampilkan "Data pasien belum tersedia".
 - Pratinjau widget bersama (mode debug): rute `/dev/widgets`.
+- Mode terang/gelap: Profil → Tampilan (Sistem · Terang · Gelap), disimpan lokal.
+
+Warna & huruf dibaca dari tema: `context.warna.ink`, `context.teks.caption`. Palet terang & gelap ada di
+`lib/core/theme/app_colors.dart`; arti warna sama di kedua mode (merah kritis, kuning perhatian, hijau selesai).
 
 ## Cek kualitas
 

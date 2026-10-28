@@ -79,7 +79,7 @@ class _CatatanTabState extends ConsumerState<CatatanTab> {
                   '${semua.length} catatan',
                   belum == 0 ? 'semua terverifikasi' : '$belum belum diverifikasi',
                 ].join(' · '),
-                style: AppText.caption,
+                style: context.teks.caption,
               ),
               const SizedBox(height: AppSpacing.s3),
               if (tampil.isEmpty)
@@ -126,8 +126,8 @@ class KartuCppt extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(c.ppa, style: AppText.bodyStrong),
-                    Text(c.waktu, style: AppText.small),
+                    Text(c.ppa, style: context.teks.bodyStrong),
+                    Text(c.waktu, style: context.teks.small),
                   ],
                 ),
               ),
@@ -146,9 +146,9 @@ class KartuCppt extends StatelessWidget {
                 children: [
                   SizedBox(
                     width: AppSpacing.s6,
-                    child: Text(huruf, style: AppText.bodyStrong),
+                    child: Text(huruf, style: context.teks.bodyStrong),
                   ),
-                  Expanded(child: Text(isi.isEmpty ? '–' : isi, style: AppText.body)),
+                  Expanded(child: Text(isi.isEmpty ? '–' : isi, style: context.teks.body)),
                 ],
               ),
             ),

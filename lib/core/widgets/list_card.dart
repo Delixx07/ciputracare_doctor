@@ -14,9 +14,9 @@ class ListCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.surfaceRaised,
+        color: context.warna.surfaceRaised,
         borderRadius: const BorderRadius.all(AppRadius.lg),
-        border: Border.all(color: AppColors.line),
+        border: Border.all(color: context.warna.line),
         boxShadow: AppShadow.card,
       ),
       child: ClipRRect(
@@ -71,11 +71,13 @@ class ListCardItem extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(title, style: AppText.bodyStrong),
+                    Text(title, style: context.teks.bodyStrong),
                     if (subtitle != null)
                       Text(
                         subtitle!,
-                        style: subtitleColor == null ? AppText.caption : AppText.caption.copyWith(color: subtitleColor),
+                        style: subtitleColor == null
+                            ? context.teks.caption
+                            : context.teks.caption.copyWith(color: subtitleColor),
                       ),
                   ],
                 ),
@@ -83,7 +85,7 @@ class ListCardItem extends StatelessWidget {
               if (trailing != null) ...[const SizedBox(width: AppSpacing.s2), trailing!],
               if (onTap != null) ...[
                 const SizedBox(width: AppSpacing.s2),
-                const Icon(Icons.chevron_right, color: AppColors.ink, size: AppSize.icon),
+                Icon(Icons.chevron_right, color: context.warna.ink, size: AppSize.icon),
               ],
             ],
           ),

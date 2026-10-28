@@ -65,7 +65,7 @@ void main() {
     expect(find.text('EWS 2'), findsOneWidget);
     expect(find.text('Vital 07:20'), findsOneWidget);
     expect(find.text('TD 156/86 ▲ · Nyeri 7/10 ▲', findRichText: true), findsOneWidget);
-    expect(spanColor(tester, 'TD 156/86 ▲'), AppColors.danger);
+    expect(spanColor(tester, 'TD 156/86 ▲'), AppColors.terang.danger);
     expect(find.text('Detail'), findsOneWidget);
     expect(find.text('GCS'), findsNothing);
   });
@@ -78,8 +78,8 @@ void main() {
     for (final label in ['GCS', 'TD', 'HR', 'RR', 'Suhu', 'SpO₂', 'Nyeri', 'BMI']) {
       expect(find.text(label), findsOneWidget, reason: label);
     }
-    expect(spanColor(tester, '100'), AppColors.ink);
-    expect(spanColor(tester, '156/86'), AppColors.danger);
+    expect(spanColor(tester, '100'), AppColors.terang.ink);
+    expect(spanColor(tester, '156/86'), AppColors.terang.danger);
     expect(find.text('Datang 07:12 · Asuransi swasta (Admedika)'), findsOneWidget);
 
     await tester.tap(find.text('Tutup'));

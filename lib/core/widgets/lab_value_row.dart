@@ -34,7 +34,7 @@ class LabValueRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final kritis = status == ValueStatus.kritis;
     return Material(
-      color: kritis ? AppColors.dangerSoft : Colors.transparent,
+      color: kritis ? context.warna.dangerSoft : Colors.transparent,
       child: InkWell(
         onTap: onTap,
         child: ConstrainedBox(
@@ -48,9 +48,9 @@ class LabValueRow extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(item, style: AppText.bodyStrong),
+                      Text(item, style: context.teks.bodyStrong),
                       const SizedBox(height: AppSpacing.s05),
-                      Text('Rujukan $rujukan · sebelumnya ${sebelumnya ?? '–'}', style: AppText.small),
+                      Text('Rujukan $rujukan · sebelumnya ${sebelumnya ?? '–'}', style: context.teks.small),
                     ],
                   ),
                 ),
@@ -64,7 +64,10 @@ class LabValueRow extends StatelessWidget {
                     else if (status.isAbnormal)
                       Text(
                         [?status.arrow, ?status.label].join(' '),
-                        style: AppText.small.copyWith(color: status.color, fontWeight: FontWeight.w700),
+                        style: context.teks.small.copyWith(
+                          color: status.warna(context.warna),
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                   ],
                 ),

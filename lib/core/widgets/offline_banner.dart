@@ -17,16 +17,16 @@ class OfflineBanner extends StatelessWidget {
       liveRegion: true,
       child: Container(
         width: double.infinity,
-        color: AppColors.amberSoft,
+        color: context.warna.amberSoft,
         padding: const EdgeInsets.symmetric(horizontal: AppSpacing.s4, vertical: AppSpacing.s2),
         child: Row(
           children: [
-            const Icon(Icons.cloud_off_outlined, size: AppSize.iconSm, color: AppColors.amber),
+            Icon(Icons.cloud_off_outlined, size: AppSize.iconSm, color: context.warna.amber),
             const SizedBox(width: AppSpacing.s2),
             Expanded(
               child: Text(
                 'Offline · data diperbarui ${DateFormat('HH:mm').format(diperbarui)}',
-                style: AppText.caption.copyWith(color: AppColors.amber),
+                style: context.teks.caption.copyWith(color: context.warna.amber),
               ),
             ),
           ],
