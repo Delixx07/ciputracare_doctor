@@ -1,0 +1,163 @@
+{
+  "_catatan": "Data FIKTIF untuk prototipe. Bentuk mengikuti data yang ada di Medinfras (EMR web).",
+  "dokter": {
+    "nama": "dr. Andreas Wijaya",
+    "kode": "D0412",
+    "unit": "IGD",
+    "shift": "Pagi 07–14"
+  },
+  "pasien": [
+    {
+      "noReg": "EMR/20261028/00001",
+      "noRm": "00-01-88-20",
+      "nama": "Siti Rahmawati",
+      "umur": "58 th",
+      "jk": "P",
+      "bed": "Bed 5",
+      "datang": "06:40",
+      "triage": 2,
+      "keluhan": "Nyeri dada kiri menjalar ke lengan",
+      "status": "Menunggu konsul Kardiologi",
+      "statusTone": "warn",
+      "milikSaya": true
+    },
+    {
+      "noReg": "EMR/20261028/00002",
+      "noRm": "00-03-17-42",
+      "nama": "Hendra Kusuma",
+      "umur": "36 th",
+      "jk": "L",
+      "bed": "Bed 2",
+      "datang": "07:12",
+      "triage": 3,
+      "keluhan": "Diare cair 8× sejak pagi, mual",
+      "status": "Nilai kritis GDS 452 · 2 order masih diproses",
+      "statusTone": "lab",
+      "milikSaya": true
+    },
+    {
+      "noReg": "EMR/20261028/00003",
+      "noRm": "00-01-94-10",
+      "nama": "Kevin Hartono",
+      "umur": "5 th",
+      "jk": "L",
+      "bed": "Bed 3",
+      "datang": "07:20",
+      "triage": 2,
+      "keluhan": "Sesak napas, demam 3 hari",
+      "status": "Kajian dokter belum diisi",
+      "statusTone": "todo",
+      "milikSaya": false
+    },
+    {
+      "noReg": "EMR/20261028/00004",
+      "noRm": "00-02-55-07",
+      "nama": "Agus Pratama",
+      "umur": "41 th",
+      "jk": "L",
+      "bed": "Bed 7",
+      "datang": "08:05",
+      "triage": 4,
+      "keluhan": "Luka robek telapak tangan kanan",
+      "status": "Siap disposisi",
+      "statusTone": "done",
+      "milikSaya": true
+    }
+  ],
+  "serahTerima": "dr. Yohanes (shift malam): 2 pasien menunggu hasil lab, 1 menunggu konsul Kardiologi.",
+  "notifikasi": [
+    {
+      "id": "n1",
+      "jenis": "lab",
+      "judul": "Nilai kritis · Hendra Kusuma",
+      "isi": "GDS 452 mg/dL ▲",
+      "jam": "08:32",
+      "belumDibaca": true,
+      "tone": "danger",
+      "noReg": "EMR/20261028/00002",
+      "tab": "lab"
+    },
+    {
+      "id": "n2",
+      "jenis": "igd",
+      "judul": "Pasien baru · triage level 2",
+      "isi": "Kevin Hartono, 5 th · sesak napas · Bed 3",
+      "jam": "07:22",
+      "belumDibaca": true,
+      "tone": "warn",
+      "noReg": "EMR/20261028/00003",
+      "tab": "kajian"
+    },
+    {
+      "id": "n3",
+      "jenis": "igd",
+      "judul": "Catatan perawat baru",
+      "isi": "Ns. Rudi Hartanto · Hendra Kusuma · 07:30",
+      "jam": "07:31",
+      "belumDibaca": true,
+      "tone": "info",
+      "noReg": "EMR/20261028/00002",
+      "tab": "catatan"
+    },
+    {
+      "id": "n4",
+      "jenis": "igd",
+      "judul": "Konsul dijawab · Kardiologi",
+      "isi": "Siti Rahmawati · dr. Hadi, Sp.JP: rencana EKG serial",
+      "jam": "07:15",
+      "belumDibaca": true,
+      "tone": "info",
+      "noReg": "EMR/20261028/00001",
+      "tab": "catatan"
+    },
+    {
+      "id": "n5",
+      "jenis": "lab",
+      "judul": "Sampel diterima laboratorium",
+      "isi": "Hendra Kusuma · urin & feses lengkap",
+      "jam": "08:27",
+      "belumDibaca": false,
+      "tone": "neutral",
+      "noReg": "EMR/20261028/00002",
+      "tab": "lab"
+    }
+  ],
+  "labMasuk": [
+    {
+      "noReg": "EMR/20261028/00002",
+      "nama": "Hendra Kusuma",
+      "bed": "Bed 2",
+      "jam": "08:32",
+      "pemeriksaan": "GDS, HbA1c, Na/K/Cl, kreatinin, CRP, +4",
+      "ringkasan": "GDS 452 mg/dL ▲ kritis · 10 di luar rujukan",
+      "status": "kritis"
+    },
+    {
+      "noReg": "EMR/20261028/00001",
+      "nama": "Siti Rahmawati",
+      "bed": "Bed 5",
+      "jam": "08:05",
+      "pemeriksaan": "Troponin I, CK-MB, elektrolit",
+      "ringkasan": "Troponin I 0,42 ng/mL ▲ kritis, sudah dikonfirmasi",
+      "status": "kritisDikonfirmasi"
+    },
+    {
+      "noReg": "EMR/20261028/00002",
+      "nama": "Hendra Kusuma",
+      "bed": "Bed 2",
+      "jam": "08:25",
+      "pemeriksaan": "Urin lengkap, feses lengkap",
+      "ringkasan": "Diproses · perkiraan 09:30",
+      "status": "diproses"
+    },
+    {
+      "noReg": "EMR/20261028/00003",
+      "nama": "Kevin Hartono",
+      "bed": "Bed 3",
+      "jam": "07:58",
+      "pemeriksaan": "Darah lengkap, CRP",
+      "ringkasan": "Semua dalam rujukan",
+      "status": "normal"
+    }
+  ]
+}

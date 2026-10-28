@@ -1,0 +1,402 @@
+{
+  "_catatan": "Data FIKTIF satu pasien IGD lengkap (dipakai di semua layar halaman pasien).",
+  "header": {
+    "noReg": "EMR/20261028/00002",
+    "noRm": "00-03-17-42",
+    "nama": "Hendra Kusuma",
+    "umur": "36 th",
+    "jk": "L",
+    "bed": "Bed 2",
+    "datang": "07:12",
+    "penjamin": "Asuransi swasta (Admedika)",
+    "alergi": "Alergi obat · nama tidak diingat",
+    "triage": "Triage 3",
+    "ews": 2,
+    "vital": {
+      "jam": "07:20",
+      "GCS": "15",
+      "TD": "156/86",
+      "HR": "100",
+      "RR": "20",
+      "Suhu": "36,0",
+      "SpO2": "96",
+      "Nyeri": "7/10",
+      "BMI": "28,1",
+      "abnormal": [
+        "TD",
+        "Nyeri"
+      ]
+    }
+  },
+  "kajianAwal": {
+    "triage": {
+      "skala": "ATS 1–5",
+      "level": 3,
+      "olehPerawat": "Level 3 · 07:12"
+    },
+    "anamnesa": {
+      "tanggalJam": "28 Okt 2026 · 07:13",
+      "jenisKunjungan": "Kegawatdaruratan",
+      "sumber": "Autoanamnesis",
+      "keluhanUtama": "BAB cair 8× sejak pagi, mual.",
+      "rps": "Diare 3 hari, >5×/hari, ampas sedikit, darah (−), lendir (−). Nyeri ulu hati, mual (+++), muntah (−), lemas, nafsu makan turun. Demam (−), sesak (−). BAK normal.",
+      "keadaanDatang": "Non-trauma",
+      "alasanKunjungan": "Penyakit",
+      "fastTrack": false
+    },
+    "pengkajianPerawat": {
+      "oleh": "Ns. Rudi Hartanto · 07:12",
+      "caraDatang": "Berjalan",
+      "rujukan": "Datang sendiri",
+      "abcde": {
+        "Airway": "Paten",
+        "Breathing": "Tidak sesak",
+        "Circulation": "Takikardia",
+        "Disability": "Alert",
+        "Exposure": "Tidak ada luka"
+      },
+      "abnormal": [
+        "Circulation"
+      ]
+    },
+    "riwayat": {
+      "penyakitDahulu": [
+        "Diabetes melitus"
+      ],
+      "catatan": "DM tipe 2 sejak 2019, kontrol tidak teratur. Tidak ada riwayat operasi.",
+      "obat": [
+        {
+          "nama": "Metformin 500 mg tablet",
+          "aturan": "2 × 1 · sesudah makan",
+          "terakhir": "tadi malam"
+        }
+      ],
+      "alergi": [
+        {
+          "jenis": "Obat",
+          "nama": "nama tidak diingat",
+          "reaksi": "Gatal dan bentol",
+          "keparahan": "ringan",
+          "dicatat": "perawat 07:12"
+        }
+      ]
+    },
+    "pemeriksaan": {
+      "vital": {
+        "TD sistol": "156",
+        "TD diastol": "86",
+        "HR": "100",
+        "RR": "20",
+        "Suhu °C": "36,0",
+        "SpO₂ %": "96",
+        "Nyeri": "7",
+        "GCS": "15",
+        "BB kg": "87",
+        "TB cm": "176",
+        "BMI": "28,1",
+        "EWS": "2"
+      },
+      "fisikAbnormal": [
+        {
+          "sistem": "Abdomen",
+          "temuan": "Nyeri tekan epigastrium, bising usus meningkat"
+        }
+      ],
+      "mst": {
+        "skor": 3,
+        "kesimpulan": "berisiko"
+      }
+    },
+    "assessment": {
+      "diagnosa": [
+        {
+          "kode": "A09.0",
+          "nama": "Gastroenteritis akut infeksius",
+          "tipe": "Utama"
+        },
+        {
+          "kode": "E87.6",
+          "nama": "Hipokalemia",
+          "tipe": "Sekunder"
+        },
+        {
+          "kode": "E11.9",
+          "nama": "DM tipe 2 tanpa komplikasi",
+          "tipe": "Penyerta"
+        }
+      ],
+      "prosedur": [
+        {
+          "kode": "38.93",
+          "nama": "Pemasangan infus vena"
+        },
+        {
+          "kode": "99.18",
+          "nama": "Injeksi elektrolit"
+        },
+        {
+          "kode": "89.52",
+          "nama": "EKG"
+        },
+        {
+          "kode": "99.29",
+          "nama": "Injeksi obat lain"
+        }
+      ]
+    },
+    "planning": {
+      "terapi": "IVFD RL 500 ml/jam × 2, lanjut 20 tpm. KCl 25 mEq dalam NaCl 0,9% 500 ml/8 jam. Ondansetron 4 mg IV. Pasang IV line 20G tangan kiri.",
+      "instruksi": [
+        "Cek GDS ulang 10:00",
+        "Observasi TTV tiap 1 jam",
+        "Konsul penyakit dalam"
+      ],
+      "resepOrder": [
+        "Order lab: elektrolit & GDS ulang (CITO)",
+        "Order lab: urin & feses lengkap"
+      ]
+    }
+  },
+  "cppt": [
+    {
+      "ppa": "dr. Andreas Wijaya · Dokter IGD",
+      "waktu": "Hari ini, 08:40",
+      "status": "Terverifikasi",
+      "S": "Masih BAB cair 2× sejak datang, mual berkurang.",
+      "O": "TD 142/84, HR 92. Nyeri tekan epigastrium. K 3,1↓ · Na 131↓ · kreatinin 1,6↑.",
+      "A": "GEA dengan dehidrasi ringan–sedang, hipokalemia, DM tipe 2.",
+      "P": "RL 500 ml/jam × 2, KCl drip, ondansetron 4 mg IV, GDS ulang 10:00."
+    },
+    {
+      "ppa": "Ns. Rudi Hartanto · Perawat",
+      "waktu": "Hari ini, 07:30",
+      "status": "Belum diverifikasi",
+      "S": "BAB cair 8× sejak pagi, mual.",
+      "O": "TD 156/86, HR 100, nyeri 7/10.",
+      "A": "Diare.",
+      "P": "Lapor dokter jaga, pasang IV line, ambil sampel lab."
+    }
+  ],
+  "disposisi": {
+    "status": "Belum diproses",
+    "rencana": "Pengantar rawat inap",
+    "ruang": "6 West · kelas 1",
+    "dpjp": "dr. Lina Gunawan, Sp.PD",
+    "penjamin": "Admedika · aktif",
+    "indikasi": "Dehidrasi, hipokalemia, AKI",
+    "catatan": "2 pemeriksaan lab masih diproses"
+  },
+  "lab": {
+    "nilaiKritis": {
+      "item": "GDS",
+      "nilai": "452 mg/dL",
+      "dilaporkan": "08:32",
+      "statusKonfirmasi": "Belum dikonfirmasi"
+    },
+    "order": [
+      {
+        "noTrx": "LAC/20261028/00031",
+        "judul": "Elektrolit & GDS ulang",
+        "cito": true,
+        "tahap": 1,
+        "waktu": [
+          "08:50",
+          null,
+          null,
+          null
+        ],
+        "status": "Menunggu sampel",
+        "item": [],
+        "pengirim": "dr. Andreas Wijaya · IGD",
+        "sampel": "Darah vena"
+      },
+      {
+        "noTrx": "LAC/20261028/00026",
+        "judul": "Urin & feses lengkap",
+        "cito": false,
+        "tahap": 3,
+        "waktu": [
+          "08:20",
+          "08:25",
+          "08:40",
+          null
+        ],
+        "status": "Diproses · ±09:30",
+        "item": [],
+        "pengirim": "dr. Andreas Wijaya · IGD",
+        "sampel": "Urin & feses"
+      },
+      {
+        "noTrx": "LAC/20261028/00023",
+        "judul": "GDS, HbA1c",
+        "cito": false,
+        "tahap": 4,
+        "waktu": [
+          "08:05",
+          "08:12",
+          "08:15",
+          "08:31"
+        ],
+        "status": "1 kritis",
+        "item": [
+          "GDS",
+          "HbA1c"
+        ],
+        "pengirim": "dr. Andreas Wijaya · IGD",
+        "pemeriksa": "dr. Maria Lestari, Sp.PK",
+        "sampel": "Darah vena · diambil 08:12"
+      },
+      {
+        "noTrx": "LAC/20261028/00018",
+        "judul": "7 pemeriksaan (kimia, hematologi, serologi)",
+        "cito": false,
+        "tahap": 4,
+        "waktu": [
+          "07:30",
+          "07:35",
+          "07:40",
+          "08:32"
+        ],
+        "status": "8 di luar rujukan",
+        "item": [
+          "SGPT",
+          "SGOT",
+          "Natrium",
+          "Kalium",
+          "Klorida",
+          "Tubex (IgM Salmonella)",
+          "Leukosit",
+          "CRP kuantitatif",
+          "Kreatinin"
+        ],
+        "pengirim": "dr. Andreas Wijaya · IGD",
+        "pemeriksa": "dr. Maria Lestari, Sp.PK",
+        "sampel": "Darah vena · diambil 07:35"
+      }
+    ],
+    "hasil": [
+      {
+        "item": "GDS",
+        "nilai": "452",
+        "satuan": "mg/dL",
+        "rujukan": "70–140",
+        "sebelumnya": "312",
+        "flag": "kritis"
+      },
+      {
+        "item": "HbA1c",
+        "nilai": "9,1",
+        "satuan": "%",
+        "rujukan": "< 5,7",
+        "sebelumnya": null,
+        "flag": "tinggi"
+      },
+      {
+        "item": "SGPT",
+        "nilai": "48",
+        "satuan": "U/L",
+        "rujukan": "< 41",
+        "sebelumnya": "35",
+        "flag": "tinggi"
+      },
+      {
+        "item": "Natrium",
+        "nilai": "131",
+        "satuan": "mmol/L",
+        "rujukan": "136–145",
+        "sebelumnya": "137",
+        "flag": "rendah"
+      },
+      {
+        "item": "Kalium",
+        "nilai": "3,1",
+        "satuan": "mmol/L",
+        "rujukan": "3,5–5,1",
+        "sebelumnya": "3,6",
+        "flag": "rendah"
+      },
+      {
+        "item": "Klorida",
+        "nilai": "97",
+        "satuan": "mmol/L",
+        "rujukan": "98–107",
+        "sebelumnya": "101",
+        "flag": "rendah"
+      },
+      {
+        "item": "Tubex (IgM Salmonella)",
+        "nilai": "4",
+        "satuan": "skor",
+        "rujukan": "≤ 2",
+        "sebelumnya": null,
+        "flag": "tinggi"
+      },
+      {
+        "item": "Leukosit",
+        "nilai": "13,8",
+        "satuan": "rb/uL",
+        "rujukan": "3,8–10,6",
+        "sebelumnya": "9,2",
+        "flag": "tinggi"
+      },
+      {
+        "item": "CRP kuantitatif",
+        "nilai": "18,4",
+        "satuan": "mg/L",
+        "rujukan": "< 5",
+        "sebelumnya": "4,2",
+        "flag": "tinggi"
+      },
+      {
+        "item": "Kreatinin",
+        "nilai": "1,6",
+        "satuan": "mg/dL",
+        "rujukan": "0,7–1,3",
+        "sebelumnya": "1,0",
+        "flag": "tinggi"
+      },
+      {
+        "item": "SGOT",
+        "nilai": "32",
+        "satuan": "U/L",
+        "rujukan": "< 40",
+        "sebelumnya": "30",
+        "flag": null
+      }
+    ],
+    "tren": {
+      "item": "GDS",
+      "satuan": "mg/dL",
+      "rujukan": [
+        70,
+        140
+      ],
+      "titik": [
+        {
+          "waktu": "25 Okt 19:02",
+          "nilai": 289,
+          "kunjungan": "IGD · kunjungan lalu"
+        },
+        {
+          "waktu": "28 Okt 07:49",
+          "nilai": 452,
+          "kunjungan": "IGD · kunjungan ini"
+        }
+      ]
+    },
+    "radiologi": [
+      {
+        "pemeriksaan": "Foto thorax PA",
+        "status": "Menunggu pasien",
+        "dipesan": "08:50"
+      }
+    ],
+    "lainnya": [
+      {
+        "pemeriksaan": "EKG 12 lead",
+        "status": "Selesai 07:40",
+        "hasil": "Sinus takikardia 104×/mnt, tidak ada perubahan ST-T."
+      }
+    ]
+  }
+}

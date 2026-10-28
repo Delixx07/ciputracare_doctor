@@ -1,0 +1,10 @@
+export 'beranda.dart';
+export 'cppt.dart';
+export 'disposisi.dart';
+export 'dokter.dart';
+export 'header_pasien.dart';
+export 'kajian_awal.dart';
+export 'lab.dart';
+export 'notifikasi.dart';
+export 'pasien_igd.dart';
+export 'rekam_pasien.dart';
